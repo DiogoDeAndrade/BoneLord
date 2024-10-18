@@ -58,6 +58,8 @@ public class PlayerControl : MonoBehaviour
     {
         foreach (var controllable in controllables)
         {
+            if (!controllable.CanSelect()) continue;
+
             if (controllable.Overlap(position))
             {
                 return controllable;

@@ -72,4 +72,6 @@ public class Character : MonoBehaviour
     {
         targetPos = null;
     }
+
+    public bool isMoving => targetPos != null;
 }

@@ -9,6 +9,9 @@ public class Controllable : MonoBehaviour
 
     Color originalColor;
     Character character;
+    
+    public bool      canSelect = true;
+    public Vector2   lastMoveOrderPos;
 
     private void Start()
     {
@@ -16,7 +19,9 @@ public class Controllable : MonoBehaviour
 
         character = GetComponent<Character>();
 
-        originalColor = GetComponent<SpriteRenderer>().color;        
+        originalColor = GetComponent<SpriteRenderer>().color;
+
+        lastMoveOrderPos = transform.position;
     }
 
     private void OnDestroy()
@@ -27,6 +32,11 @@ public class Controllable : MonoBehaviour
     public bool Overlap(Vector2 pos)
     {
         return (Vector2.Distance(transform.position.xy() + selectionOffset, pos) < selectionRadius);
+    }
+
+    public bool CanSelect()
+    {
+        return canSelect;
     }
 
     public void Select()
@@ -41,6 +51,7 @@ public class Controllable : MonoBehaviour
     
     public void MoveTo(Vector2 targetPos)
     {
+        lastMoveOrderPos = targetPos;
         character.MoveTo(targetPos);
     }
 
