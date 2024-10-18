@@ -2,13 +2,14 @@
 # Game ideas
 
 * Player start with a necromancer, a single goblin, a summoning circle and the spell book
-* Player can send the goblin into the playfield to fetch anything
+* (x) Player can send the goblin into the playfield to fetch anything
 * Player can get some gold from the playfield
 * When player catches gold, it will open access to the store
 * In the store, the player can buy/sell stuff
 * With the Spellbook, the player can unlock ingredients by spending souls
 * Player can get a pickaxe from the field - when it gets a pickaxe, it can buy more of those from the shop
 * (?) Player can also craft things using the cauldron - stuff like pickaxes
+* Player can summon skeletons by using the summoning circle
 
 # Minions
 
