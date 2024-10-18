@@ -4,12 +4,17 @@ using System.Collections.Generic;
 public class PlayerControl : MonoBehaviour
 {
     [SerializeField]
-    private Camera mainCamera;
+    private Camera              mainCamera;
+    [SerializeField] 
+    private Hypertag            boneLord;
+    [SerializeField]
+    private DisplayInventory    inventoryDisplay;
 
     static PlayerControl Instance;
 
     private Controllable        currentSelection;
     private List<Controllable>  controllables;
+    private Inventory           playerInventory;
 
     void Awake()
     {
@@ -19,6 +24,8 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
+        playerInventory = gameObject.FindObjectOfTypeWithHypertag<Inventory>(boneLord);
+        inventoryDisplay.SetInventory(playerInventory);
     }
 
     void Update()
@@ -51,6 +58,11 @@ public class PlayerControl : MonoBehaviour
             {
                 currentSelection.MoveTo(ray.origin);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventoryDisplay.ToggleDisplay();
         }
     }
 
