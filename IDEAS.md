@@ -7,15 +7,15 @@
 * When player catches gold, it will open access to the store
 * In the store, the player can buy/sell stuff
 * With the Spellbook, the player can unlock ingredients by spending souls
-* Player can get a pickaxe from the field - when it gets a pickaxe, it can buy more of those from the shop
+* (x) Player can get a pickaxe from the field - when it gets a pickaxe, it can buy more of those from the shop
 * (?) Player can also craft things using the cauldron - stuff like pickaxes
-* Player can summon skeletons by using the summoning circle
+* (x) Player can summon skeletons by using the summoning circle
 
 # Minions
 
 * Goblin: 0 ATK, 0 DEF - will flee from any enemy in range, will grab any item in range
-* Basic skeleton: 1 ATK, 0 DEF - will attack any enemy in range
-* Mining skeleton: 2 ATK, 0 DEF - will mine any ore node in range, will not attack unless attacked
+* (x) Basic skeleton: 1 ATK, 0 DEF - will attack any enemy in range
+* (x) Mining skeleton: 2 ATK, 0 DEF - will mine any ore node in range, will not attack unless attacked
 
 # Store
 
@@ -26,7 +26,7 @@
 
 # Spellbook
 
-* Basic skeleton - N bones
+* (x) Basic skeleton - N bones
 * Spending souls unlocks more ingredients
 * Studying gets souls
 * Defeating enemies gets souls
@@ -34,10 +34,10 @@
 
 # Ingredients
 
-* Bones => More bones = More HP
-* Pickaxe => Can mine and attack power +1
+* (x) Bones => More bones = More HP
+* (x) Pickaxe => Can mine
 
-* Only one tool per summon
+* (x) Only one tool per summon
 
 # Cauldron
 
