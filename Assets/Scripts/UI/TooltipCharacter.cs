@@ -8,6 +8,9 @@ public class TooltipCharacter : Tooltip
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] Image           healthBar;
     [SerializeField] Gradient        healthGradient;
+    [SerializeField] Color           playerColor = Color.white;   
+    [SerializeField] Color           enemyColor = Color.white;
+    [SerializeField] Color           environmentColor = Color.white;
 
     RectTransform healthRectTransform;
 
@@ -23,6 +26,7 @@ public class TooltipCharacter : Tooltip
         if (character != null)
         {
             nameText.text = character.displayName;
+            nameText.color = GetColorByFaction(character.faction);
 
             int hp = Mathf.FloorToInt(character.hp);
             int maxHP = Mathf.FloorToInt(character.maxHP);
@@ -38,5 +42,17 @@ public class TooltipCharacter : Tooltip
         {
             Close();
         }
+    }
+
+    Color GetColorByFaction(Faction faction)
+    {
+        switch (faction)
+        {
+            case Faction.Player: return playerColor;
+            case Faction.Enemy: return enemyColor;
+            case Faction.Environment: return environmentColor;
+        }
+
+        return Color.white;
     }
 }

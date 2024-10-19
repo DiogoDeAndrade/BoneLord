@@ -1,5 +1,7 @@
 using NaughtyAttributes;
+using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Character : MonoBehaviour
 {
@@ -8,21 +10,33 @@ public class Character : MonoBehaviour
     [SerializeField, MinMaxSlider(1.0f, 60.0f)]
     private Vector2 _emoteCooldown = new Vector2(10.0f, 30.0f);
     [SerializeField]
+    private bool    flipHorizontal;
+    [SerializeField]
     private float   _moveSpeed = 100.0f;
     [SerializeField]
     private float   _maxHP = 20;
     [SerializeField]
     private string  _displayName;
+    [SerializeField]
+    private float   enemyDetectionRadius = 0.0f;
 
-    public bool isPlayer => _faction == Faction.Player;
+    public bool         isPlayer => _faction == Faction.Player;
+    public Faction      faction => _faction;
+    public float        hp { get; private set; }
+    public float        maxHP => _maxHP;
+    public string       displayName => _displayName;
+    public Character    closestEnemy { get; private set; }
+    public bool         isMoving => targetPos != null;
+    public bool         isDead => (hp <= 0);
+
 
     float       emoteTimer;
     Animator    animator;
     Vector2?    targetPos = null;
-    public float       hp { get; private set; }
+    bool        alert = false;
 
-    public string   displayName => _displayName;
-    public float    maxHP => _maxHP;
+    public delegate void OnAlert(bool alertEnable);
+    public event OnAlert onAlert;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,6 +56,8 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) return;
+
         Vector3 prevPos = transform.position;
 
         if (targetPos.HasValue)
@@ -74,8 +90,61 @@ public class Character : MonoBehaviour
 
         animator.SetFloat("AbsVelocityX", Mathf.Abs(speed.x));
 
+        // Detect enemy?
+        closestEnemy = DetectClosestEnemy();
+
+        if (closestEnemy != null)
+        {
+            if (!alert)
+            {
+                alert = true;
+                onAlert?.Invoke(true);
+            }
+            // Modify speed so that this character points towards the enemy instead of the move direction
+            speed.x = closestEnemy.transform.position.x - transform.position.x;
+        }
+        else
+        {
+            if (alert)
+            {
+                alert = false;
+                onAlert?.Invoke(false);
+            }
+        }
+
+        if (flipHorizontal) speed.x = -speed.x;
         if ((speed.x < 0) && (transform.right.x > 0)) transform.rotation = Quaternion.Euler(0, 180, 0);
-        else if ((speed.x > 0) && (transform.right.x < 0)) transform.rotation = Quaternion.identity;
+        else if ((speed.x > 0) && (transform.right.x < 0)) transform.rotation = Quaternion.identity;        
+    }
+
+    Character DetectClosestEnemy()
+    {
+        Character   closestCharacter = null;
+        float       closestDist = float.MaxValue;
+
+        if (enemyDetectionRadius > 0)
+        {
+            var colliders = Physics2D.OverlapCircleAll(transform.position, enemyDetectionRadius, 1 << gameObject.layer);
+            foreach (var collider in colliders)
+            {
+                // Check if it is an item
+                var character = collider.GetComponent<Character>();
+                if (character != null)
+                {
+                    if ((!character.isDead) && (character.faction.IsEnemy(_faction)))
+                    {
+                        float d = Vector3.Distance(character.transform.position, transform.position);
+                        if (d < closestDist)
+                        {
+                            closestDist = d;
+                            closestCharacter = character;
+                        }
+                    }
+                }
+            }
+        }
+
+        return closestCharacter;
     }
 
     public void MoveTo(Vector2 targetPos)
@@ -88,6 +157,27 @@ public class Character : MonoBehaviour
         targetPos = null;
     }
 
-    public bool isMoving => targetPos != null;
+    public void DealDamage(float damage, DamageType damageType)
+    {
+        if (hp > 0)
+        {
+            hp = Mathf.Clamp(hp - damage, 0, maxHP);
 
+            if (hp == 0)
+            {
+                // Die
+                animator.SetTrigger("Die");
+            }
+        }
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        if (enemyDetectionRadius > 0)
+        {
+            Gizmos.color = new Color(0.25f, 0.0f, 0.0f, 1.0f);
+            Gizmos.DrawWireSphere(transform.position, enemyDetectionRadius);
+        }
+    }
 }

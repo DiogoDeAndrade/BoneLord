@@ -9,6 +9,8 @@ public class Controllable : MonoBehaviour
     public bool      canSelect = true;
     public Vector2   lastMoveOrderPos;
 
+    public bool isDead => character.isDead;
+
     private void Start()
     {
         character = GetComponent<Character>();
@@ -19,7 +21,7 @@ public class Controllable : MonoBehaviour
 
     public bool CanSelect()
     {
-        return canSelect;
+        return canSelect && !character.isDead;
     }
 
     public void Select()

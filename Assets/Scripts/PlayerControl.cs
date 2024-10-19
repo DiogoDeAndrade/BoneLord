@@ -118,6 +118,12 @@ public class PlayerControl : MonoBehaviour
         {
             ToggleInventory();
         }
+
+        if ((currentSelection != null) && (currentSelection.isDead))
+        {
+            currentSelection.Deselect();
+            currentSelection = null;
+        }
     }
 
     void ToggleInventory()

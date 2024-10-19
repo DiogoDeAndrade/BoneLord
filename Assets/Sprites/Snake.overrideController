@@ -6,16 +6,16 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wizard
+  m_Name: Snake
   m_Controller: {fileID: 9100000, guid: 6420d2588a77d294b8342bb2a289736c, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 67713f206b45a3b40b599d4683a29716, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 67713f206b45a3b40b599d4683a29716, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 589f656b9ae287d4ca4ec63237fd43e7, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 589f656b9ae287d4ca4ec63237fd43e7, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: bfca5568a6ffff3429493242865f53ea, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: bfca5568a6ffff3429493242865f53ea, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 23880a5860ee81349950b6839f845030, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 67713f206b45a3b40b599d4683a29716, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9a7e2bcce890f214197f25e13d2c4db5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 589f656b9ae287d4ca4ec63237fd43e7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a93c0fd38c53fd5458fda2ff3377073e, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 9bf2ed88033dbc245830e12bce0ab006, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 9bf2ed88033dbc245830e12bce0ab006, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c20b32a6c58a1e24cb7628b79c1e7956, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: d07ce5e6e3ac13942b3e6a438d3f76ed, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 9bf2ed88033dbc245830e12bce0ab006, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fbe4ed2a662b8f64baa3e361989a8d66, type: 2}

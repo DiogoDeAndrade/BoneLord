@@ -9,6 +9,7 @@ A game for the Zer0 Game Jam at Universidade Lusófona. The theme was "Bones".
 * [Animated Wizard sprites](https://opengameart.org/content/animated-wizard) by [Calciumtrice](https://opengameart.org/users/calciumtrice), licensed through [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)
 * [Skeleton sprites](https://opengameart.org/content/animated-skeleton) by [Calciumtrice](https://opengameart.org/users/calciumtrice), licensed through [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)
 * [Animated goblin sprites](https://opengameart.org/content/animated-goblins) by [Calciumtrice](https://opengameart.org/users/calciumtrice), licensed through [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)
+* [Animated snake sprites](https://opengameart.org/content/animated-snake) by [Calciumtrice](https://opengameart.org/users/calciumtrice), licensed through [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)
 * [Detective Items](https://opengameart.org/content/16x16-detective-items) by [ARoachIFoundOnMyPillow](https://opengameart.org/users/aroachifoundonmypillow), licensed through [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
 * [Golden UI](https://opengameart.org/content/golden-ui) by [Buch](https://opengameart.org/users/buch), licensed through [CC0](https://creativecommons.org/
 * [Pixeled font](https://www.dafont.com/pt/pixeled.font) by [OmegaPC777](https://www.dafont.com/pt/omegapc777.d6598), free to use.
