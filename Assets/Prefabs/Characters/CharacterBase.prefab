@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 5610366403376239270}
   - component: {fileID: 3867783511894326301}
   - component: {fileID: 5607888125798724250}
+  - component: {fileID: 2819539093487289653}
   m_Layer: 7
   m_Name: CharacterBase
   m_TagString: Untagged
@@ -252,9 +253,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _faction: 0
   _emoteCooldown: {x: 9.944116, y: 28.176735}
+  flipHorizontal: 0
   _moveSpeed: 200
   _maxHP: 20
   _displayName: Undefined Name
+  enemyDetectionRadius: 0
 --- !u!114 &5607888125798724250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,3 +272,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseY: 0
   slopeZ: 0.001
+--- !u!114 &2819539093487289653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031285181206291231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f928b7e5ac7bf7647a0f79746acea9c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

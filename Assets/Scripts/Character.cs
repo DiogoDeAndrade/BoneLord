@@ -32,6 +32,7 @@ public class Character : MonoBehaviour
 
     float       emoteTimer;
     Animator    animator;
+    Flash       flash;
     Vector2?    targetPos = null;
     bool        alert = false;
     Vector2     ctOffset;
@@ -43,6 +44,7 @@ public class Character : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        flash = GetComponent<Flash>();
         emoteTimer = _emoteCooldown.Random();
         hp = _maxHP;
 
@@ -173,6 +175,8 @@ public class Character : MonoBehaviour
 
             Color color = Globals.GetColor(damageType);
             CombatTextManager.SpawnText(gameObject, ctOffset, -damage, "{0}", color, color.ChangeAlpha(0), 1.0f, 1.0f);
+
+            flash.Execute(0.25f, color, color.ChangeAlpha(0));
 
             if (hp == 0)
             {
