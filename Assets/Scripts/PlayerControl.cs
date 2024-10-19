@@ -9,6 +9,10 @@ public class PlayerControl : MonoBehaviour
     private Hypertag            boneLord;
     [SerializeField]
     private UIPanel[]           panels;
+    [SerializeField]
+    private TooltipManager      tooltipManager;
+    [SerializeField]
+    private LayerMask           itemLayer;
 
     static PlayerControl Instance;
 
@@ -33,13 +37,38 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        if (!isMouseOnPanels())
+        Vector2 mp = Input.mousePosition;
+
+        bool onPanels = false;
+        foreach (var panel in panels)
         {
+            if (!panel.isOpen) continue;
+
+            RectTransform rt = panel.transform as RectTransform;
+
+            if (IsOverUI(mp, rt))
+            {
+                onPanels = true;
+                panel.UpdateTooltip(tooltipManager);
+
+                break;
+            }
+        }
+
+        if (!onPanels)
+        {
+            // Clicked the mouse
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            // Check if mouse is hovering any pickable
+            Pickable pickable = GetPickableAt(ray.origin);
+            if (pickable)
+            {
+                tooltipManager.SetItem(pickable.item);
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
-                // Clicked the mouse
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
                 Controllable controllable = GetControllableAt(ray.origin);
                 if (controllable)
                 {
@@ -57,8 +86,6 @@ public class PlayerControl : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(1))
             {
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
                 if (currentSelection != null)
                 {
                     currentSelection.MoveTo(ray.origin);
@@ -91,6 +118,30 @@ public class PlayerControl : MonoBehaviour
         return null;
     }
 
+    Pickable GetPickableAt(Vector2 position)
+    {
+        Pickable closestPickable = null;
+        float closestDist = float.MaxValue;
+
+        var colliders = Physics2D.OverlapCircleAll(position, 5, itemLayer);
+        foreach (var collider in colliders)
+        {
+            // Check if it is an item
+            var item = collider.GetComponent<Pickable>();
+            if (item != null)
+            {
+                float d = Vector3.Distance(item.transform.position, position);
+                if (d < closestDist)
+                {
+                    closestDist = d;
+                    closestPickable = item;
+                }
+            }
+        }
+
+        return closestPickable;
+    }
+
     private T GetPanel<T>() where T : UIPanel
     {
         foreach (var panel in panels)
@@ -108,6 +159,8 @@ public class PlayerControl : MonoBehaviour
 
         foreach (var panel in panels)
         {
+            if (!panel.isOpen) continue;
+
             RectTransform rt = panel.transform as RectTransform;
 
             if (IsOverUI(mp, rt))

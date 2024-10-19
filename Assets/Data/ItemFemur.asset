@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ItemFemur
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 847abcd3f24f9d941a4aadb3ba9bea50, type: 3}
-  text: Femur
+  displayName: Femur

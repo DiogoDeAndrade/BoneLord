@@ -37,6 +37,9 @@ public class Gatherer : MonoBehaviour
             {
                 targetItem = null;
 
+                Pickable closestPickable = null;
+                float    closestDist = float.MaxValue;
+
                 var colliders = Physics2D.OverlapCircleAll(transform.position, searchRadius, itemLayer);
                 foreach (var collider in colliders)
                 {
@@ -44,10 +47,20 @@ public class Gatherer : MonoBehaviour
                     var item = collider.GetComponent<Pickable>();
                     if (item != null)
                     {
-                        // Move towards this item
-                        character.MoveTo(item.transform.position);
-                        targetItem = item;
+                        float d = Vector3.Distance(item.transform.position, transform.position);
+                        if (d < closestDist)
+                        {
+                            closestDist = d;
+                            closestPickable = item;
+                        }
                     }
+                }
+
+                if (closestPickable != null)
+                { 
+                    // Move towards this item
+                    character.MoveTo(closestPickable.transform.position);
+                    targetItem = closestPickable;
                 }
 
                 if (targetItem == null)
