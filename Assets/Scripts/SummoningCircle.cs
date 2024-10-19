@@ -5,7 +5,10 @@ using NaughtyAttributes;
 
 public class SummoningCircle : MonoBehaviour
 {
-    [SerializeField] private Hypertag boneLord;
+    [SerializeField] private Hypertag   boneLord;
+    [SerializeField] private Character  skeletonPrefab;
+    [SerializeField] private Hypertag   boneItemTag;
+    [SerializeField] private Hypertag   toolItemTag;    
 
     Coroutine summonCR;
 
@@ -30,12 +33,6 @@ public class SummoningCircle : MonoBehaviour
         summonCR = StartCoroutine(SummonCR(items));
     }
 
-    [Button("Test")]
-    void test()
-    {
-        summonCR = StartCoroutine(SummonCR(null));
-    }
-
     IEnumerator SummonCR(List<Item> items)
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
@@ -43,7 +40,7 @@ public class SummoningCircle : MonoBehaviour
 
         playerCharacter?.HoldCast(true);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             yield return new WaitForSeconds(0.2f);
 
@@ -61,9 +58,45 @@ public class SummoningCircle : MonoBehaviour
             mov.speed = Vector3.up * 50.0f;
         }
 
-        // Spawn creature
+        // Count bones
+        Item    tool = null;
+        int     nBones = 0;
+        foreach (var item in items)
+        {
+            if (item.IsA(boneItemTag))
+            {
+                nBones++;
+            }
+            else if ((toolItemTag != null) && (item.IsA(toolItemTag)))
+            {
+                tool = item;
+            }
+        }
 
-        for (int i = 0; i < 10; i++)
+        // Spawn creature
+        Character newSkeleton = Instantiate(skeletonPrefab, transform.position, Quaternion.identity);
+        newSkeleton.displayName = "Skeleton";
+        newSkeleton.SetMaxHP(10 + nBones * 15);
+
+        if (nBones == items.Count)
+        {
+            newSkeleton.displayName = "Buff Skeleton";
+        }
+        if (tool == null)
+        {
+            float attackSpeed = 0.5f + nBones / items.Count;
+
+            // Add melee attack component
+            MeleeAttack ma = newSkeleton.gameObject.AddComponent<MeleeAttack>();
+            ma.Set(20, 0.5f, attackSpeed, nBones, DamageType.Physical);
+        }
+
+        yield return null;
+
+        Flash flash = newSkeleton.GetComponent<Flash>();
+        flash?.Execute(0.5f, Color.cyan, Color.cyan.ChangeAlpha(0));
+
+        for (int i = 0; i < 5; i++)
         {
             yield return new WaitForSeconds(0.2f);
 

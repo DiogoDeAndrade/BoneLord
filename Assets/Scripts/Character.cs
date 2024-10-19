@@ -21,11 +21,15 @@ public class Character : MonoBehaviour
     [SerializeField]
     private float   enemyDetectionRadius = 0.0f;
 
+    public float        moveSpeed => _moveSpeed;
     public bool         isPlayer => _faction == Faction.Player;
     public Faction      faction => _faction;
     public float        hp { get; private set; }
     public float        maxHP => _maxHP;
-    public string       displayName => _displayName;
+    public string       displayName { 
+        get { return _displayName; }
+        set { _displayName = value; } 
+    }
     public Character    closestEnemy { get; private set; }
     public bool         isMoving => targetPos != null;
     public bool         isDead => (hp <= 0);
@@ -218,6 +222,10 @@ public class Character : MonoBehaviour
     {
         _buffs.Tick();
     }
+    internal void SetMaxHP(int maxHP)
+    {
+        _maxHP = maxHP;
+    }
 
 
     private void OnDrawGizmosSelected()
@@ -228,4 +236,5 @@ public class Character : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, enemyDetectionRadius);
         }
     }
+
 }

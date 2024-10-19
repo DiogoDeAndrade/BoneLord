@@ -181,7 +181,7 @@ public class PlayerControl : MonoBehaviour
             var character = collider.GetComponent<Character>();
             if (character != null)
             {
-                float d = Vector3.Distance(character.transform.position, position);
+                float d = character.transform.position.z;
                 if (d < closestDist)
                 {
                     closestDist = d;

@@ -9,6 +9,8 @@ public class UISummoningCircle : UIPanel
     [SerializeField] private Image          circleImage;
     [SerializeField] private Image          orbImage;
 
+    [SerializeField] private Item[]         debugStartItems;
+
     int slotCount = 3;
     Inventory               inventory;
     DisplayInventory        displayInventory;
@@ -44,6 +46,28 @@ public class UISummoningCircle : UIPanel
 
         Canvas canvas = GetComponentInParent<Canvas>();
         mainCamera = canvas.worldCamera;
+
+#if UNITY_EDITOR
+        if (debugStartItems != null)
+        {
+            RefreshSlots();
+        }
+#endif
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+#if UNITY_EDITOR
+        if (debugStartItems != null)
+        {
+            for (int i = 0; i < Mathf.Min(debugStartItems.Length, ingredientSlots.Count); i++)
+            {
+                ingredientSlots[i].SetItem(debugStartItems[i]);
+            }
+        }
+#endif
     }
 
     public void SetSlotCount(int count)

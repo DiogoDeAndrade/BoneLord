@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 847abcd3f24f9d941a4aadb3ba9bea50, type: 3}
   displayName: Femur
+  categories:
+  - {fileID: 11400000, guid: 01875aa7039dab443a83575c25ab864d, type: 2}

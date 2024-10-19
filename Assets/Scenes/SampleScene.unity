@@ -2140,6 +2140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boneLord: {fileID: 11400000, guid: a25fbfbfa42a07c4a9cba4545637c2e4, type: 2}
+  skeletonPrefab: {fileID: 6643219894848748424, guid: 0479fa6ae0f65064c99de0d4cc05c5d9, type: 3}
+  boneItemTag: {fileID: 11400000, guid: 01875aa7039dab443a83575c25ab864d, type: 2}
+  toolItemTag: {fileID: 0}
 --- !u!114 &1026726198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2614,6 +2617,10 @@ MonoBehaviour:
   slotPrefab: {fileID: 8534955189043107591, guid: f7c08f275ad31744d9b4902bdca12e9f, type: 3}
   circleImage: {fileID: 1037396880}
   orbImage: {fileID: 229740247}
+  debugStartItems:
+  - {fileID: 11400000, guid: 8809464851754dc46b915687a3aac40d, type: 2}
+  - {fileID: 11400000, guid: 46582763311aa3c47bbdce89d1ca54c4, type: 2}
+  - {fileID: 11400000, guid: 8809464851754dc46b915687a3aac40d, type: 2}
 --- !u!225 &1316084466
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5410,6 +5417,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
+  - {fileID: 1026726192}
   - {fileID: 2824368800835898186}
   - {fileID: 1597121171266838785}
   - {fileID: 1420933481}
@@ -5419,4 +5427,3 @@ SceneRoots:
   - {fileID: 1423986665}
   - {fileID: 690299129}
   - {fileID: 6527652159174241529}
-  - {fileID: 1026726192}

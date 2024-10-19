@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -28,12 +29,20 @@ public class MeleeAttack : MonoBehaviour
 
         if (attackTimer <= 0)
         {
+            if (character.isMoving) return;
+
             var enemy = character.closestEnemy;
             if (enemy == null) return;
 
             if (InDistance(enemy))
             {
                 StartCoroutine(AttackCR(enemy));
+            }
+            else if (character.moveSpeed > 0)
+            {
+                Vector3 pos = enemy.transform.position - (enemy.transform.position - transform.position).normalized * attackRadius * 0.5f;
+
+                character.MoveTo(pos);
             }
         }
     }
@@ -75,5 +84,14 @@ public class MeleeAttack : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
+    }
+
+    internal void Set(float attackRadius = 20.0f, float damageDelayTime = 0.5f, float attackCooldown = 1.0f, int attackPower = 1, DamageType damageType = DamageType.Physical)
+    {
+        this.attackRadius = attackRadius;
+        this.damageDelayTime = damageDelayTime;
+        this.attackCooldown = attackCooldown;
+        this.baseAttackPower = attackPower;
+        this.damageType = damageType;
     }
 }

@@ -11,7 +11,7 @@ public class IngredientSlot : MonoBehaviour
     private void Start()
     {
         rectTransform = transform as RectTransform;
-        SetItem(null);
+        SetItem(item);
     }
 
     public void SetItem(Item item)
