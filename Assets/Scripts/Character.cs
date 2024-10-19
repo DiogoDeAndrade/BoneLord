@@ -20,6 +20,8 @@ public class Character : MonoBehaviour
     private string  _displayName;
     [SerializeField]
     private float   enemyDetectionRadius = 0.0f;
+    [SerializeField]
+    private Transform _toolPivot;
 
     public float        moveSpeed => _moveSpeed;
     public bool         isPlayer => _faction == Faction.Player;
@@ -38,11 +40,14 @@ public class Character : MonoBehaviour
 
     float       emoteTimer;
     Animator    animator;
+    Animator    animTool;
     Flash       flash;
     Vector2?    targetPos = null;
     bool        alert = false;
     Vector2     ctOffset;
     Buffs       _buffs;
+    Item        _currentTool;
+    GameObject  _toolObj;
 
     public delegate void OnAlert(bool alertEnable);
     public event OnAlert onAlert;
@@ -66,6 +71,11 @@ public class Character : MonoBehaviour
         }
 
         Globals.onTick += OnRPGTick;
+
+        if (_toolPivot)
+        {
+            animTool = _toolPivot.GetComponent<Animator>();
+        }
     }
 
     private void OnDestroy()
@@ -227,6 +237,22 @@ public class Character : MonoBehaviour
         _maxHP = maxHP;
     }
 
+    internal void SetTool(Item tool)
+    {
+        if (_toolPivot == null) return;
+
+        GameObject toolPrefab = Globals.GetPrefab(tool);
+        if (toolPrefab)
+        {
+            _toolObj = Instantiate(toolPrefab, _toolPivot);
+            _currentTool = tool;
+        }
+    }
+
+    internal void UseTool(bool v)
+    {
+        animTool?.SetBool("Work", v);
+    }
 
     private void OnDrawGizmosSelected()
     {

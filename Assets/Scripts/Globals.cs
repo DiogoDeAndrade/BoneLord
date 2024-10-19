@@ -1,7 +1,15 @@
+using System;
 using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
+    [Serializable]
+    struct ToolPrefab
+    {
+        public Item         tool;
+        public GameObject   prefab;
+    }
+
     [SerializeField, Header("RPG")]
     public float _tickFrequency = 1.0f;
     [SerializeField, Header("Name Color")] 
@@ -20,6 +28,8 @@ public class Globals : MonoBehaviour
     Color _damageMagic = Color.white;
     [SerializeField]
     Color _damagePoison = Color.white;
+    [SerializeField, Header("Tool Prefabs")]
+    ToolPrefab[] toolPrefabs;
 
     public delegate void OnTick();
     
@@ -63,6 +73,18 @@ public class Globals : MonoBehaviour
     }
 
     public static float tickFrequency => Instance._tickFrequency;
+
+    public static GameObject GetPrefab(Item item)
+    {
+        if (Instance.toolPrefabs == null) return null;
+
+        foreach (var tp in Instance.toolPrefabs)
+        {
+            if (tp.tool == item) return tp.prefab;
+        }
+
+        return null;
+    }
 
     private void Update()
     {

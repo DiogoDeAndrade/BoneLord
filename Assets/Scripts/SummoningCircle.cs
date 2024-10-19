@@ -8,7 +8,8 @@ public class SummoningCircle : MonoBehaviour
     [SerializeField] private Hypertag   boneLord;
     [SerializeField] private Character  skeletonPrefab;
     [SerializeField] private Hypertag   boneItemTag;
-    [SerializeField] private Hypertag   toolItemTag;    
+    [SerializeField] private Hypertag   toolItemTag;
+    [SerializeField] private Hypertag   minerItemTag;
 
     Coroutine summonCR;
 
@@ -22,6 +23,17 @@ public class SummoningCircle : MonoBehaviour
     public bool IsValid(List<Item> items)
     {
         if (summonCR != null) return false;
+
+        int toolCount = 0;
+        int boneCount = 0;
+        foreach (var item in items)
+        {
+            if (item.IsA(boneItemTag)) boneCount++;
+            if (item.IsA(toolItemTag)) toolCount++;
+        }
+
+        if (boneCount == 0) return false;
+        if (toolCount > 1) return false;
 
         return true;
     }
@@ -89,6 +101,16 @@ public class SummoningCircle : MonoBehaviour
             // Add melee attack component
             MeleeAttack ma = newSkeleton.gameObject.AddComponent<MeleeAttack>();
             ma.Set(20, 0.5f, attackSpeed, nBones, DamageType.Physical);
+        }
+        else
+        {
+            newSkeleton.SetTool(tool);
+
+            if (tool.IsA(minerItemTag))
+            {
+                var miner = newSkeleton.gameObject.AddComponent<ResourceGather>();
+                miner.SetTool(tool);
+            }
         }
 
         yield return null;
