@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -13,23 +14,27 @@ public class PlayerControl : MonoBehaviour
     private TooltipManager      tooltipManager;
     [SerializeField]
     private LayerMask           itemLayer;
+    [SerializeField]
+    private LayerMask           characterLayer;
 
     static PlayerControl Instance;
 
     private Controllable        currentSelection;
-    private List<Controllable>  controllables;
+    private List<Character>     characters;
     private Inventory           playerInventory;
+    private Character           playerCharacter;
     private DisplayInventory    inventoryDisplay;
 
     void Awake()
     {
         Instance = this;
-        controllables = new();
+        characters = new();
     }
 
     private void Start()
     {
         playerInventory = gameObject.FindObjectOfTypeWithHypertag<Inventory>(boneLord);
+        playerCharacter = gameObject.FindObjectOfTypeWithHypertag<Character>(boneLord);
 
         inventoryDisplay = GetPanel<DisplayInventory>();
         inventoryDisplay?.SetInventory(playerInventory);
@@ -39,7 +44,8 @@ public class PlayerControl : MonoBehaviour
     {
         Vector2 mp = Input.mousePosition;
 
-        bool onPanels = false;
+        UIPanel hoverPanel = null;
+
         foreach (var panel in panels)
         {
             if (!panel.isOpen) continue;
@@ -48,40 +54,53 @@ public class PlayerControl : MonoBehaviour
 
             if (IsOverUI(mp, rt))
             {
-                onPanels = true;
-                panel.UpdateTooltip(tooltipManager);
-
+                hoverPanel = panel;
                 break;
             }
-        }
+        }        
 
-        if (!onPanels)
+        if (hoverPanel)
+        {
+            hoverPanel.UpdateTooltip(tooltipManager);
+        }
+        else
         {
             // Clicked the mouse
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            // Check if mouse is hovering any pickable
-            Pickable pickable = GetPickableAt(ray.origin);
-            if (pickable)
+            Character       hoverCharacter = GetCharacterAt(ray.origin);
+            Controllable    hoverControllable = null;
+
+            if (hoverCharacter)
             {
-                tooltipManager.SetItem(pickable.item);
+                hoverControllable = hoverCharacter.GetComponent<Controllable>();
+                if (hoverControllable)
+                {
+                    if (!hoverControllable.canSelect)
+                    {
+                        hoverControllable = null;
+                    }
+                }
+            }
+            else
+            {
+                // Check if mouse is hovering any pickable
+                Pickable pickable = GetPickableAt(ray.origin);
+                if (pickable)
+                {
+                    tooltipManager.SetItem(pickable.item);
+                }
             }
 
             if (Input.GetMouseButtonDown(0))
             {
-                Controllable controllable = GetControllableAt(ray.origin);
-                if (controllable)
+                currentSelection?.Deselect();
+                currentSelection = hoverControllable;
+                currentSelection?.Select();
+
+                if (hoverCharacter == playerCharacter)
                 {
-                    currentSelection?.Deselect();
-                    if (controllable != null)
-                    {
-                        currentSelection = controllable;
-                        currentSelection.Select();
-                    }
-                }
-                else
-                {
-                    currentSelection?.Deselect();
+                    ToggleInventory();
                 }
             }
             if (Input.GetMouseButtonDown(1))
@@ -95,27 +114,41 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (!inventoryDisplay.isOpen)
-            {
-                CloseAllPanels();
-            }
-            inventoryDisplay.ToggleDisplay();
+            ToggleInventory();
         }
     }
 
-    Controllable GetControllableAt(Vector2 position)
+    void ToggleInventory()
     {
-        foreach (var controllable in controllables)
+        if (!inventoryDisplay.isOpen)
         {
-            if (!controllable.CanSelect()) continue;
+            CloseAllPanels();
+        }
+        inventoryDisplay.ToggleDisplay();
+    }
 
-            if (controllable.Overlap(position))
+    Character GetCharacterAt(Vector2 position)
+    {
+        Character   closestCharacter = null;
+        float       closestDist = float.MaxValue;
+
+        var colliders = Physics2D.OverlapCircleAll(position, 5, characterLayer);
+        foreach (var collider in colliders)
+        {
+            // Check if it is an item
+            var character = collider.GetComponent<Character>();
+            if (character != null)
             {
-                return controllable;
+                float d = Vector3.Distance(character.transform.position, position);
+                if (d < closestDist)
+                {
+                    closestDist = d;
+                    closestCharacter = character;
+                }
             }
         }
 
-        return null;
+        return closestCharacter;
     }
 
     Pickable GetPickableAt(Vector2 position)
@@ -192,13 +225,13 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    static public void AddControllable(Controllable controllable)
+    static public void AddCharacter(Character character)
     {
-        Instance.controllables.Add(controllable);
+        Instance.characters.Add(character);
     }
 
-    static public void RemoveControllable(Controllable controllable)
+    static public void RemoveCharacter(Character character)
     {
-        Instance.controllables.Remove(controllable);
+        Instance.characters.Remove(character);
     }
 }

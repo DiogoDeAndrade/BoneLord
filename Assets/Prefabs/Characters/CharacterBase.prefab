@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4269261129744070407}
   - component: {fileID: 7248193839006996082}
   - component: {fileID: 2117597555753108581}
+  - component: {fileID: 5610366403376239270}
   - component: {fileID: 3867783511894326301}
   - component: {fileID: 5607888125798724250}
   m_Layer: 7
@@ -200,6 +201,43 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &5610366403376239270
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031285181206291231}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 16}
+  m_Size: {x: 12, y: 32}
+  m_Direction: 0
 --- !u!114 &3867783511894326301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +253,8 @@ MonoBehaviour:
   _faction: 0
   _emoteCooldown: {x: 9.944116, y: 28.176735}
   _moveSpeed: 200
+  selectionRadius: 20
+  selectionOffset: {x: 0, y: 0}
 --- !u!114 &5607888125798724250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,3 +267,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c5b60cda5aa3147a5b626d70aeec9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseY: 0
+  slopeZ: 0.001

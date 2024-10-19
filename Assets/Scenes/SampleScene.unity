@@ -765,6 +765,9 @@ MonoBehaviour:
   itemLayer:
     serializedVersion: 2
     m_Bits: 64
+  characterLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &1420933481
 Transform:
   m_ObjectHideFlags: 0
@@ -1171,11 +1174,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1976920823806582990, guid: 7c1bf3d940e830941a0b75ff5a174436, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -296.52
+      value: -283.4
       objectReference: {fileID: 0}
     - target: {fileID: 1976920823806582990, guid: 7c1bf3d940e830941a0b75ff5a174436, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -27.24
+      value: -41.1
       objectReference: {fileID: 0}
     - target: {fileID: 1976920823806582990, guid: 7c1bf3d940e830941a0b75ff5a174436, type: 3}
       propertyPath: m_LocalPosition.z

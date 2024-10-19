@@ -8,8 +8,7 @@ public class Character : MonoBehaviour
     [SerializeField, MinMaxSlider(1.0f, 60.0f)]
     private Vector2 _emoteCooldown = new Vector2(10.0f, 30.0f);
     [SerializeField]
-    private float   _moveSpeed = 200.0f;
-
+    private float   _moveSpeed = 100.0f;
 
     public bool isPlayer => _faction == Faction.Player;
 
@@ -22,6 +21,13 @@ public class Character : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         emoteTimer = _emoteCooldown.Random();
+
+        PlayerControl.AddCharacter(this);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerControl.RemoveCharacter(this);
     }
 
     // Update is called once per frame
@@ -74,4 +80,5 @@ public class Character : MonoBehaviour
     }
 
     public bool isMoving => targetPos != null;
+
 }
