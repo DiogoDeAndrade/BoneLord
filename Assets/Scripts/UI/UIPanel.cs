@@ -10,7 +10,7 @@ public class UIPanel : MonoBehaviour
 
     float canvasInc;
 
-    void Start()
+    protected virtual void Start()
     {
         canvasGroup= GetComponent<CanvasGroup>();
 

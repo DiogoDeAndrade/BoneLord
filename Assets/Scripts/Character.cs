@@ -9,18 +9,27 @@ public class Character : MonoBehaviour
     private Vector2 _emoteCooldown = new Vector2(10.0f, 30.0f);
     [SerializeField]
     private float   _moveSpeed = 100.0f;
+    [SerializeField]
+    private float   _maxHP = 20;
+    [SerializeField]
+    private string  _displayName;
 
     public bool isPlayer => _faction == Faction.Player;
 
     float       emoteTimer;
     Animator    animator;
     Vector2?    targetPos = null;
+    public float       hp { get; private set; }
+
+    public string   displayName => _displayName;
+    public float    maxHP => _maxHP;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = GetComponent<Animator>();
         emoteTimer = _emoteCooldown.Random();
+        hp = _maxHP;
 
         PlayerControl.AddCharacter(this);
     }

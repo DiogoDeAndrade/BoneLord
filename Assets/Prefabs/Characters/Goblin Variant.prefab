@@ -17,6 +17,14 @@ PrefabInstance:
       value: 9.534837
       objectReference: {fileID: 0}
     - target: {fileID: 4990346238852152096, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
+      propertyPath: _maxHP
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990346238852152096, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
+      propertyPath: _displayName
+      value: Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990346238852152096, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
       propertyPath: selectionRadius
       value: 8
       objectReference: {fileID: 0}

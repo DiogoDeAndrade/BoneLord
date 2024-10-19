@@ -5,13 +5,16 @@ public class TooltipManager : MonoBehaviour
     [SerializeField] Camera     mainCamera;
     [SerializeField] Vector2    offset;
 
-    TooltipItem     tooltipItem;
-    RectTransform   parentTransform;
-    RectTransform   rectTransform;
+    TooltipItem         tooltipItem;
+    TooltipCharacter    tooltipCharacter;
+    RectTransform       parentTransform;
+    RectTransform       rectTransform;
 
     private void Start()
     {
         tooltipItem = GetComponentInChildren<TooltipItem>();
+        tooltipCharacter = GetComponentInChildren<TooltipCharacter>();
+
         parentTransform = transform.parent as RectTransform;
         rectTransform = transform as RectTransform;
     }
@@ -21,9 +24,15 @@ public class TooltipManager : MonoBehaviour
         tooltipItem.SetItem(item);
     }
 
+    public void SetCharacter(Character character)
+    {
+        tooltipCharacter.SetCharacter(character);
+    }
+
     public void CloseAll()
     {
         tooltipItem.Close();
+        tooltipCharacter.Close();
     }
 
     private void Update()

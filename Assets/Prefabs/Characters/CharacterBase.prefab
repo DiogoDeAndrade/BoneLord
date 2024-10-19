@@ -253,8 +253,8 @@ MonoBehaviour:
   _faction: 0
   _emoteCooldown: {x: 9.944116, y: 28.176735}
   _moveSpeed: 200
-  selectionRadius: 20
-  selectionOffset: {x: 0, y: 0}
+  _maxHP: 20
+  _displayName: Undefined Name
 --- !u!114 &5607888125798724250
 MonoBehaviour:
   m_ObjectHideFlags: 0

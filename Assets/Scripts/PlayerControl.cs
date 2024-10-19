@@ -73,6 +73,8 @@ public class PlayerControl : MonoBehaviour
 
             if (hoverCharacter)
             {
+                tooltipManager.SetCharacter(hoverCharacter);
+
                 hoverControllable = hoverCharacter.GetComponent<Controllable>();
                 if (hoverControllable)
                 {

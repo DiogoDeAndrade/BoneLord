@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3867783511894326301, guid: 604435e63eda95b4c9135d155d15b8c2, type: 3}
+      propertyPath: _displayName
+      value: Bonelord
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867783511894326301, guid: 604435e63eda95b4c9135d155d15b8c2, type: 3}
       propertyPath: selectionRadius
       value: 15
       objectReference: {fileID: 0}
