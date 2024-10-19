@@ -21,18 +21,6 @@ public class DisplayInventory : UIPanel
         }
     }
 
-    public void ToggleDisplay()
-    {
-        if (isOpen)
-        {
-            Close();
-        }
-        else
-        {
-            Open();
-        }
-    }
-
     public override void Open()
     {
         UpdateInventory();
@@ -49,7 +37,7 @@ public class DisplayInventory : UIPanel
             items[i].SetItem(item, _inventory.GetItemCount(item));
         }
 
-        goldText.text = $"x{_inventory.gold}";
-        soulText.text = $"x{_inventory.souls}";
+        if (goldText) goldText.text = $"x{_inventory.gold}";
+        if (soulText) soulText.text = $"x{_inventory.souls}";
     }
 }

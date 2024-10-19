@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TooltipCharacter : Tooltip
 {
     [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] RectTransform   healthContainer;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] Image           healthBar;
     [SerializeField] Gradient        healthGradient;
@@ -29,10 +30,19 @@ public class TooltipCharacter : Tooltip
             int hp = Mathf.FloorToInt(character.hp);
             int maxHP = Mathf.FloorToInt(character.maxHP);
             float hpPercentage = (float)hp / (float)maxHP;
-            healthText.text = $"{hp}/{maxHP}";
-            healthRectTransform.localScale = new Vector3(hpPercentage, 1.0f, 1.0f);
-            healthBar.color = healthGradient.Evaluate(hpPercentage);
-            displayBuffs.SetBuffs(character.buffs);
+            if (maxHP == 0)
+            {
+                healthContainer.gameObject.SetActive(false);
+                displayBuffs.SetBuffs(null);
+            }
+            else
+            {
+                healthText.text = $"{hp}/{maxHP}";
+                healthRectTransform.localScale = new Vector3(hpPercentage, 1.0f, 1.0f);
+                healthContainer.gameObject.SetActive(true);
+                healthBar.color = healthGradient.Evaluate(hpPercentage);
+                displayBuffs.SetBuffs(character.buffs);
+            }
 
             lastUpdated = Time.time;
             Open();

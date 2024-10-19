@@ -26,7 +26,21 @@ public class UIPanel : MonoBehaviour
                 ((canvasInc > 0) && (canvasGroup.alpha == 1.0f)))
             {
                 canvasInc = 0.0f;
+
+                canvasGroup.blocksRaycasts = (canvasGroup.alpha > 0.0f);
             }
+        }
+    }
+
+    public void ToggleDisplay()
+    {
+        if (isOpen)
+        {
+            Close();
+        }
+        else
+        {
+            Open();
         }
     }
 

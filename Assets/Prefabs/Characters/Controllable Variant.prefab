@@ -196,8 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee0712c18b6070243a902af6fb1c6bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionRadius: 10.54
-  selectionOffset: {x: 0, y: 7.26}
   selectorIcon: {fileID: 1614190786696555732}
   canSelect: 1
   lastMoveOrderPos: {x: 0, y: 0}

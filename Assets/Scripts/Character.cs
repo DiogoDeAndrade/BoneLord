@@ -99,14 +99,14 @@ public class Character : MonoBehaviour
             if (emoteTimer < 0)
             {
                 emoteTimer = _emoteCooldown.Random();
-                animator.SetTrigger("Emote");
+                animator?.SetTrigger("Emote");
             }
         }
 
         Vector3 deltaPos = transform.position - prevPos;
         Vector3 speed = deltaPos / Time.deltaTime;
 
-        animator.SetFloat("AbsVelocityX", Mathf.Abs(speed.x));
+        animator?.SetFloat("AbsVelocityX", Mathf.Abs(speed.x));
 
         // Detect enemy?
         closestEnemy = DetectClosestEnemy();
@@ -189,7 +189,7 @@ public class Character : MonoBehaviour
             if (hp == 0)
             {
                 // Die
-                animator.SetTrigger("Die");
+                animator?.SetTrigger("Die");
             }
 
             return true;

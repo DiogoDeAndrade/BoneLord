@@ -14,6 +14,7 @@ A game for the Zer0 Game Jam at Universidade Lusófona. The theme was "Bones".
 * [RPG UI Icons](https://opengameart.org/content/rpg-ui-icons) by [OwlishMedia](https://opengameart.org/users/owlishmedia), licensed through [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
 * [Gold treasure icons 16x16](https://opengameart.org/content/gold-treasure-icons-16x16) by [Bonsaiheldin](https://opengameart.org/users/bonsaiheldin), licensed through [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
 * [Pixel Orbs](https://opengameart.org/content/pixel-orbs) by [Flowly](https://opengameart.org/users/flowly), licensed through [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+* [Summoning Circles](https://opengameart.org/content/4-summoning-circles) by [Luke.RUSTLTD](https://opengameart.org/users/lukerustltd), licensed through [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
 * [Golden UI](https://opengameart.org/content/golden-ui) by [Buch](https://opengameart.org/users/buch), licensed through [CC0](https://creativecommons.org/
 * [Pixeled font](https://www.dafont.com/pt/pixeled.font) by [OmegaPC777](https://www.dafont.com/pt/omegapc777.d6598), free to use.
 * All code by [Diogo de Andrade], licensed under the [MIT] license.

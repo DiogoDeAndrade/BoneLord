@@ -16,6 +16,11 @@ public class DisplayBuffs : MonoBehaviour
 
     public void SetBuffs(Buffs buffs)
     {
+        if (buffs == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         gameObject.SetActive(buffs.Count > 0);
         for (int i = 0; i < elems.Length; i++)
         {

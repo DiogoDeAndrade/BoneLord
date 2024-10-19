@@ -9,6 +9,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] 
     private Hypertag            boneLord;
     [SerializeField]
+    private Hypertag            summoningCircleTag;
+    [SerializeField]
     private UIPanel[]           panels;
     [SerializeField]
     private TooltipManager      tooltipManager;
@@ -19,11 +21,13 @@ public class PlayerControl : MonoBehaviour
 
     static PlayerControl Instance;
 
-    private Controllable        currentSelection;
-    private List<Character>     characters;
-    private Inventory           playerInventory;
-    private Character           playerCharacter;
-    private DisplayInventory    inventoryDisplay;
+    private Controllable            currentSelection;
+    private List<Character>         characters;
+    private Inventory               playerInventory;
+    private Character               playerCharacter;
+    private Character               summoningCircleCharacter;
+    private DisplayInventory        inventoryDisplay;
+    private DisplaySummoningCircle  summoningCircle;
 
     void Awake()
     {
@@ -35,9 +39,13 @@ public class PlayerControl : MonoBehaviour
     {
         playerInventory = gameObject.FindObjectOfTypeWithHypertag<Inventory>(boneLord);
         playerCharacter = gameObject.FindObjectOfTypeWithHypertag<Character>(boneLord);
+        summoningCircleCharacter = gameObject.FindObjectOfTypeWithHypertag<Character>(summoningCircleTag);
 
         inventoryDisplay = GetPanel<DisplayInventory>();
         inventoryDisplay?.SetInventory(playerInventory);
+
+        summoningCircle = GetPanel<DisplaySummoningCircle>();
+        summoningCircle?.SetInventory(playerInventory);
     }
 
     void Update()
@@ -104,6 +112,10 @@ public class PlayerControl : MonoBehaviour
                 {
                     ToggleInventory();
                 }
+                else if (hoverCharacter == summoningCircleCharacter)
+                {
+                    ToggleSummoningCircle();
+                }
             }
             if (Input.GetMouseButtonDown(1))
             {
@@ -117,6 +129,10 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             ToggleInventory();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            ToggleSummoningCircle();
         }
 
         if ((currentSelection != null) && (currentSelection.isDead))
@@ -133,6 +149,14 @@ public class PlayerControl : MonoBehaviour
             CloseAllPanels();
         }
         inventoryDisplay.ToggleDisplay();
+    }
+    void ToggleSummoningCircle()
+    {
+        if (!summoningCircle.isOpen)
+        {
+            CloseAllPanels();
+        }
+        summoningCircle.ToggleDisplay();
     }
 
     Character GetCharacterAt(Vector2 position)
