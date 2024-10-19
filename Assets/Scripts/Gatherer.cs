@@ -70,16 +70,23 @@ public class Gatherer : MonoBehaviour
             {
                 if (Vector3.Distance(playerInventory.transform.position, transform.position) < grabRadius)
                 {
-                    // Returned
-                    returning = false;
-                    foreach (var item in inventory)
+                    if (!playerInventory.isFull)
                     {
-                        if (item != null)
+                        // Returned
+                        returning = false;
+                        foreach (var item in inventory)
                         {
-                            playerInventory.Add(item);
+                            if (item != null)
+                            {
+                                playerInventory.Add(item);
+                            }
                         }
+                        ClearInventory();
                     }
-                    ClearInventory();
+                    else
+                    {
+                        // Wait to unload
+                    }
                 }
             }
         }

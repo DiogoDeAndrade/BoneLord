@@ -8,13 +8,14 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] 
     private Hypertag            boneLord;
     [SerializeField]
-    private DisplayInventory    inventoryDisplay;
+    private UIPanel[]           panels;
 
     static PlayerControl Instance;
 
     private Controllable        currentSelection;
     private List<Controllable>  controllables;
     private Inventory           playerInventory;
+    private DisplayInventory    inventoryDisplay;
 
     void Awake()
     {
@@ -25,43 +26,52 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         playerInventory = gameObject.FindObjectOfTypeWithHypertag<Inventory>(boneLord);
-        inventoryDisplay.SetInventory(playerInventory);
+
+        inventoryDisplay = GetPanel<DisplayInventory>();
+        inventoryDisplay?.SetInventory(playerInventory);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!isMouseOnPanels())
         {
-            // Clicked the mouse
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-            Controllable controllable = GetControllableAt(ray.origin);
-            if (controllable)
+            if (Input.GetMouseButtonDown(0))
             {
-                currentSelection?.Deselect();
-                if (controllable != null)
+                // Clicked the mouse
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                Controllable controllable = GetControllableAt(ray.origin);
+                if (controllable)
                 {
-                    currentSelection = controllable;
-                    currentSelection.Select();
+                    currentSelection?.Deselect();
+                    if (controllable != null)
+                    {
+                        currentSelection = controllable;
+                        currentSelection.Select();
+                    }
+                }
+                else
+                {
+                    currentSelection?.Deselect();
                 }
             }
-            else
+            if (Input.GetMouseButtonDown(1))
             {
-                currentSelection?.Deselect();
-            }
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (currentSelection != null)
-            {
-                currentSelection.MoveTo(ray.origin);
+                if (currentSelection != null)
+                {
+                    currentSelection.MoveTo(ray.origin);
+                }
             }
         }
 
         if (Input.GetKeyDown(KeyCode.I))
         {
+            if (!inventoryDisplay.isOpen)
+            {
+                CloseAllPanels();
+            }
             inventoryDisplay.ToggleDisplay();
         }
     }
@@ -79,6 +89,54 @@ public class PlayerControl : MonoBehaviour
         }
 
         return null;
+    }
+
+    private T GetPanel<T>() where T : UIPanel
+    {
+        foreach (var panel in panels)
+        {
+            T p = panel as T;
+            if (p != null) return p;
+        }
+
+        return null;
+    }
+
+    private bool isMouseOnPanels()
+    {
+        Vector2 mp = Input.mousePosition;
+
+        foreach (var panel in panels)
+        {
+            RectTransform rt = panel.transform as RectTransform;
+
+            if (IsOverUI(mp, rt))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool IsOverUI(Vector2 pos, RectTransform rectTransform)
+    {
+        // Convert the mouse position to world space and then to screen point
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, pos, mainCamera, out Vector2 localPoint))
+        {
+            // Check if the local point is within the rect bounds
+            return rectTransform.rect.Contains(localPoint);
+        }
+
+        return false;
+    }
+
+    void CloseAllPanels()
+    {
+        foreach (var panel in panels)
+        {
+            panel.Close();
+        }
     }
 
     static public void AddControllable(Controllable controllable)

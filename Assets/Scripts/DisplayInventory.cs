@@ -1,13 +1,8 @@
 using UnityEngine;
 
-public class DisplayInventory : MonoBehaviour
+public class DisplayInventory : UIPanel
 {
     Inventory _inventory;
-
-    void Start()
-    {
-        gameObject.SetActive(false);
-    }
 
     public void SetInventory(Inventory inventory)
     {
@@ -24,20 +19,21 @@ public class DisplayInventory : MonoBehaviour
 
     public void ToggleDisplay()
     {
-        if (gameObject.activeSelf)
+        if (isOpen)
         {
-            gameObject.SetActive(false);
+            Close();
         }
         else
         {
-            Display();
+            Open();
         }
     }
 
-    void Display()
+    public override void Open()
     {
         UpdateInventory();
-        gameObject.SetActive(true);
+
+        base.Open();
     }
 
     void UpdateInventory()
