@@ -34,6 +34,7 @@ public class Character : MonoBehaviour
     Animator    animator;
     Vector2?    targetPos = null;
     bool        alert = false;
+    Vector2     ctOffset;
 
     public delegate void OnAlert(bool alertEnable);
     public event OnAlert onAlert;
@@ -46,6 +47,13 @@ public class Character : MonoBehaviour
         hp = _maxHP;
 
         PlayerControl.AddCharacter(this);
+
+        var collider = GetComponent<Collider2D>();
+        if (collider)
+        {
+            ctOffset = new Vector2(collider.bounds.center.x, collider.bounds.max.y);
+            ctOffset = transform.worldToLocalMatrix * ctOffset.xy0().xyz1();
+        }
     }
 
     private void OnDestroy()
@@ -162,6 +170,9 @@ public class Character : MonoBehaviour
         if (hp > 0)
         {
             hp = Mathf.Clamp(hp - damage, 0, maxHP);
+
+            Color color = Globals.GetColor(damageType);
+            CombatTextManager.SpawnText(gameObject, ctOffset, -damage, "{0}", color, color.ChangeAlpha(0), 1.0f, 1.0f);
 
             if (hp == 0)
             {

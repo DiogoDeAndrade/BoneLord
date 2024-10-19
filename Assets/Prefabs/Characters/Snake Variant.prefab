@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: _displayName
       value: Snake
       objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: flipHorizontal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: enemyDetectionRadius
+      value: 45.83
+      objectReference: {fileID: 0}
     - target: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
       propertyPath: m_Name
       value: Snake Variant
@@ -83,5 +91,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7477632161370246984}
   m_SourcePrefab: {fileID: 100100000, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+--- !u!1 &2615082454694354338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+  m_PrefabInstance: {fileID: 5414317957026171502}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7477632161370246984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2615082454694354338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5827f74eb61e345b0b9af5d30e7dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRadius: 20
+  damageDelayTime: 0.5
+  attackCooldown: 1
+  baseAttackPower: 1
+  damageType: 4

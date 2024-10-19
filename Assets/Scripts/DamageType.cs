@@ -4,4 +4,5 @@ public enum DamageType
     Fire = 1,
     Ice = 2,
     Magic = 3,
+    Poison = 4,
 }
