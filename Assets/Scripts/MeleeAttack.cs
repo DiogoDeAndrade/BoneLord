@@ -8,6 +8,7 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private float      attackCooldown = 1.0f;
     [SerializeField] private int        baseAttackPower = 1;
     [SerializeField] private DamageType damageType;
+    [SerializeField] private Buff[]     buffsToApply;
 
     private Animator    animator;
     private Character   character;
@@ -42,7 +43,16 @@ public class MeleeAttack : MonoBehaviour
 
         yield return new WaitForSeconds(damageDelayTime);
 
-        enemy.DealDamage(GetAttackPower(), damageType);
+        if (enemy.DealDamage(GetAttackPower(), damageType))
+        {
+            if (buffsToApply != null)
+            {
+                foreach (var buff in buffsToApply)
+                {
+                    enemy.ApplyBuff(buff);
+                }
+            }
+        }
     }
 
     float GetAttackPower()

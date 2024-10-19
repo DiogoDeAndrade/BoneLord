@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
+    [SerializeField, Header("RPG")]
+    public float _tickFrequency = 1.0f;
     [SerializeField, Header("Name Color")] 
     Color _playerColor = Color.white;
     [SerializeField] 
@@ -19,11 +21,19 @@ public class Globals : MonoBehaviour
     [SerializeField]
     Color _damagePoison = Color.white;
 
+    public delegate void OnTick();
+    
+    public static event OnTick onTick;
+
     static Globals Instance;
+
+    float tickTimer;
 
     private void Awake()
     {
         Instance = this;
+
+        tickTimer = _tickFrequency;
     }
 
     public static Color GetColor(Faction faction)
@@ -50,5 +60,15 @@ public class Globals : MonoBehaviour
         }
 
         return Color.white;
+    }
+
+    private void Update()
+    {
+        tickTimer -= Time.deltaTime;
+        if (tickTimer <= 0)
+        {
+            tickTimer = _tickFrequency;
+            onTick?.Invoke();
+        }
     }
 }

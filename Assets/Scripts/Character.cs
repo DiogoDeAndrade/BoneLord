@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -36,6 +37,7 @@ public class Character : MonoBehaviour
     Vector2?    targetPos = null;
     bool        alert = false;
     Vector2     ctOffset;
+    Buffs       buffs;
 
     public delegate void OnAlert(bool alertEnable);
     public event OnAlert onAlert;
@@ -47,6 +49,7 @@ public class Character : MonoBehaviour
         flash = GetComponent<Flash>();
         emoteTimer = _emoteCooldown.Random();
         hp = _maxHP;
+        buffs = new(this);
 
         PlayerControl.AddCharacter(this);
 
@@ -56,11 +59,15 @@ public class Character : MonoBehaviour
             ctOffset = new Vector2(collider.bounds.center.x, collider.bounds.max.y);
             ctOffset = transform.worldToLocalMatrix * ctOffset.xy0().xyz1();
         }
+
+        Globals.onTick += OnRPGTick;
     }
 
     private void OnDestroy()
     {
         PlayerControl.RemoveCharacter(this);
+
+        Globals.onTick -= OnRPGTick;
     }
 
     // Update is called once per frame
@@ -167,7 +174,7 @@ public class Character : MonoBehaviour
         targetPos = null;
     }
 
-    public void DealDamage(float damage, DamageType damageType)
+    public bool DealDamage(float damage, DamageType damageType)
     {
         if (hp > 0)
         {
@@ -183,7 +190,21 @@ public class Character : MonoBehaviour
                 // Die
                 animator.SetTrigger("Die");
             }
+
+            return true;
         }
+
+        return false;
+    }
+
+    public void ApplyBuff(Buff buff)
+    {
+        buffs.Apply(buff);
+    }
+
+    private void OnRPGTick()
+    {
+        buffs.Tick();
     }
 
 

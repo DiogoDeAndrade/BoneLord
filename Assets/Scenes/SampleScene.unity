@@ -1508,6 +1508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0687f913c33d22c49912d65146228b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tickFrequency: 5
   _playerColor: {r: 0.41977093, g: 0.8679245, b: 0.40530434, a: 1}
   _enemyColor: {r: 0.8867924, g: 0.4141153, b: 0.4141153, a: 1}
   _environmentColor: {r: 0.8584906, g: 0.82575315, b: 0.36040404, a: 1}
