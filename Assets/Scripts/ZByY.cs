@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 public class ZByY : MonoBehaviour
@@ -10,5 +11,11 @@ public class ZByY : MonoBehaviour
         Vector3 pos = transform.position;
         pos.z = (pos.y - baseY) * slopeZ;
         transform.position = pos;
+    }
+
+    [Button("Force Update")]
+    void ForceUpdate()
+    {
+        LateUpdate();
     }
 }

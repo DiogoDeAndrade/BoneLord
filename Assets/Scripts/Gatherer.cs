@@ -95,6 +95,7 @@ public class Gatherer : MonoBehaviour
                             }
                         }
                         ClearInventory();
+                        wanderCooldown = 0.0f;
                     }
                     else
                     {

@@ -4,11 +4,9 @@ public class Controllable : MonoBehaviour
 {
     [SerializeField] private float      selectionRadius = 20.0f;
     [SerializeField] private Vector2    selectionOffset = Vector2.zero;
+    [SerializeField] private GameObject selectorIcon;
 
-    public Color selectColor = Color.yellow;
-
-    Color originalColor;
-    Character character;
+    private Character character;
     
     public bool      canSelect = true;
     public Vector2   lastMoveOrderPos;
@@ -19,9 +17,8 @@ public class Controllable : MonoBehaviour
 
         character = GetComponent<Character>();
 
-        originalColor = GetComponent<SpriteRenderer>().color;
-
         lastMoveOrderPos = transform.position;
+        selectorIcon?.SetActive(false);
     }
 
     private void OnDestroy()
@@ -41,12 +38,12 @@ public class Controllable : MonoBehaviour
 
     public void Select()
     {
-        GetComponent<SpriteRenderer>().color = selectColor;
+        selectorIcon?.SetActive(true);
     }
 
     public void Deselect()
     {
-        GetComponent<SpriteRenderer>().color = originalColor;
+        selectorIcon?.SetActive(false);
     }
     
     public void MoveTo(Vector2 targetPos)
