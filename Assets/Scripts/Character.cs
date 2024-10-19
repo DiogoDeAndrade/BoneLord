@@ -175,6 +175,17 @@ public class Character : MonoBehaviour
         targetPos = null;
     }
 
+    public void PlayAttack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
+    public void HoldCast(bool hold)
+    {
+        animator.SetBool("HoldCast", hold);
+    }
+
+
     public bool DealDamage(float damage, DamageType damageType)
     {
         if (hp > 0)

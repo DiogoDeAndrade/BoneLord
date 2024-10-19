@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -75,7 +78,51 @@ public class Inventory : MonoBehaviour
         newSlot.item = item;
         newSlot.count = 1;
 
-        if (onChange != null) onChange();
+        onChange?.Invoke();
+    }
+
+    public void Remove(Item item)
+    {
+        foreach (var slot in items)
+        {
+            if (slot != null)
+            {
+                if (slot.item == item)
+                {
+                    slot.count--;
+                    if (slot.count == 0) slot.item = null;
+
+                    onChange?.Invoke();
+                    return;
+                }
+            }
+        }
+    }
+
+    public void RemoveAt(int index)
+    {
+        if (items[index] == null) return;
+        if (items[index].item == null) return;
+
+        items[index].count--;
+
+        if (items[index].count == 0)
+        {
+            items[index].item = null;
+        }
+
+        onChange?.Invoke();
+        return;
+    }
+
+    public void Set(int slot, Item item, int count)
+    {
+        if (items[slot] == null) items[slot] = new Slot();
+
+        items[slot].item = item;
+        items[slot].count = count;
+
+        onChange?.Invoke();
     }
 
     public bool isFull
@@ -115,6 +162,12 @@ public class Inventory : MonoBehaviour
 
         return items[index].item;
     }
+    public int GetItemCount(int index)
+    {
+        if (items[index] == null) return 0;
+
+        return items[index].count;
+    }
 
     public int GetItemCount(Item item)
     {
@@ -122,9 +175,11 @@ public class Inventory : MonoBehaviour
 
         foreach (var slot in items)
         {
+            if (slot == null) continue;
             if (slot.item == item) return slot.count;
         }
 
         return 0;
     }
+
 }

@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using static UnityEngine.Rendering.DebugUI;
+using System;
+using System.Runtime.CompilerServices;
+using UnityEditor;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -18,6 +21,8 @@ public class PlayerControl : MonoBehaviour
     private LayerMask           itemLayer;
     [SerializeField]
     private LayerMask           characterLayer;
+    [SerializeField]
+    private GameCursor          cursor;
 
     static PlayerControl Instance;
 
@@ -27,7 +32,8 @@ public class PlayerControl : MonoBehaviour
     private Character               playerCharacter;
     private Character               summoningCircleCharacter;
     private DisplayInventory        inventoryDisplay;
-    private DisplaySummoningCircle  summoningCircle;
+    private UISummoningCircle  summoningCircle;
+    private Sprite                  defaultCursor;
 
     void Awake()
     {
@@ -44,8 +50,12 @@ public class PlayerControl : MonoBehaviour
         inventoryDisplay = GetPanel<DisplayInventory>();
         inventoryDisplay?.SetInventory(playerInventory);
 
-        summoningCircle = GetPanel<DisplaySummoningCircle>();
+        summoningCircle = GetPanel<UISummoningCircle>();
         summoningCircle?.SetInventory(playerInventory);
+
+        defaultCursor = cursor.GetImage();
+        cursor.SetCamera(mainCamera);
+        Cursor.visible = false;
     }
 
     void Update()
@@ -60,7 +70,7 @@ public class PlayerControl : MonoBehaviour
 
             RectTransform rt = panel.transform as RectTransform;
 
-            if (IsOverUI(mp, rt))
+            if (rt.ScreenPointOverlaps(mp, mainCamera))
             {
                 hoverPanel = panel;
                 break;
@@ -218,42 +228,23 @@ public class PlayerControl : MonoBehaviour
         return null;
     }
 
-    private bool isMouseOnPanels()
-    {
-        Vector2 mp = Input.mousePosition;
-
-        foreach (var panel in panels)
-        {
-            if (!panel.isOpen) continue;
-
-            RectTransform rt = panel.transform as RectTransform;
-
-            if (IsOverUI(mp, rt))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    bool IsOverUI(Vector2 pos, RectTransform rectTransform)
-    {
-        // Convert the mouse position to world space and then to screen point
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, pos, mainCamera, out Vector2 localPoint))
-        {
-            // Check if the local point is within the rect bounds
-            return rectTransform.rect.Contains(localPoint);
-        }
-
-        return false;
-    }
-
     void CloseAllPanels()
     {
         foreach (var panel in panels)
         {
             panel.Close();
+        }
+    }
+
+    void _SetCursor(Sprite sprite, float scale = 1.0f)
+    {
+        if (sprite == null)
+        {
+            cursor.SetImage(defaultCursor, scale);
+        }
+        else
+        {
+            cursor.SetImage(sprite, scale);
         }
     }
 
@@ -265,5 +256,10 @@ public class PlayerControl : MonoBehaviour
     static public void RemoveCharacter(Character character)
     {
         Instance.characters.Remove(character);
+    }
+
+    static public void SetCursor(Sprite sprite, float scale = 1.0f)
+    {
+        Instance._SetCursor(sprite, scale);
     }
 }

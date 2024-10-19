@@ -45,7 +45,7 @@ public class MeleeAttack : MonoBehaviour
 
     IEnumerator AttackCR(Character enemy)
     {
-        animator.SetTrigger("Attack");
+        character.PlayAttack();
         attackTimer = attackCooldown + damageDelayTime;
 
         yield return new WaitForSeconds(damageDelayTime);
