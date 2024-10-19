@@ -62,6 +62,8 @@ public class Globals : MonoBehaviour
         return Color.white;
     }
 
+    public static float tickFrequency => Instance._tickFrequency;
+
     private void Update()
     {
         tickTimer -= Time.deltaTime;

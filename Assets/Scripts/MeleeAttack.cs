@@ -22,6 +22,8 @@ public class MeleeAttack : MonoBehaviour
 
     void Update()
     {
+        if (character.isDead) return;
+
         attackTimer -= Time.deltaTime;
 
         if (attackTimer <= 0)
@@ -29,11 +31,16 @@ public class MeleeAttack : MonoBehaviour
             var enemy = character.closestEnemy;
             if (enemy == null) return;
 
-            if (Vector3.Distance(enemy.transform.position, transform.position) < attackRadius)
+            if (InDistance(enemy))
             {
                 StartCoroutine(AttackCR(enemy));
             }
         }
+    }
+
+    bool InDistance(Character enemy)
+    {
+        return Vector3.Distance(enemy.transform.position, transform.position) < attackRadius;
     }
 
     IEnumerator AttackCR(Character enemy)
@@ -43,13 +50,17 @@ public class MeleeAttack : MonoBehaviour
 
         yield return new WaitForSeconds(damageDelayTime);
 
-        if (enemy.DealDamage(GetAttackPower(), damageType))
+        // Check if still in distance and not dead (attacker and enemy)
+        if ((InDistance(enemy)) && (!character.isDead) && (!enemy.isDead))
         {
-            if (buffsToApply != null)
+            if (enemy.DealDamage(GetAttackPower(), damageType))
             {
-                foreach (var buff in buffsToApply)
+                if (buffsToApply != null)
                 {
-                    enemy.ApplyBuff(buff);
+                    foreach (var buff in buffsToApply)
+                    {
+                        enemy.ApplyBuff(buff);
+                    }
                 }
             }
         }

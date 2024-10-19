@@ -8,6 +8,7 @@ public class TooltipCharacter : Tooltip
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] Image           healthBar;
     [SerializeField] Gradient        healthGradient;
+    [SerializeField] DisplayBuffs    displayBuffs;
 
     RectTransform healthRectTransform;
 
@@ -31,6 +32,7 @@ public class TooltipCharacter : Tooltip
             healthText.text = $"{hp}/{maxHP}";
             healthRectTransform.localScale = new Vector3(hpPercentage, 1.0f, 1.0f);
             healthBar.color = healthGradient.Evaluate(hpPercentage);
+            displayBuffs.SetBuffs(character.buffs);
 
             lastUpdated = Time.time;
             Open();

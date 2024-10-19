@@ -13,6 +13,8 @@ public class Buffs
         this.character = character;
     }
 
+    public int Count => activeBuffs.Count;
+
     public bool Apply(Buff buffType)
     {
         var instance = GetInstance(buffType);
@@ -39,6 +41,15 @@ public class Buffs
             {
                 return buff;
             }
+        }
+
+        return null;
+    }
+    public Buff.Instance GetInstance(int i)
+    {
+        if (activeBuffs.Count > i)
+        {
+            return activeBuffs[i];
         }
 
         return null;

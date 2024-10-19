@@ -7,18 +7,24 @@ public class Buff : ScriptableObject
 {
     public class Instance
     {
-        public Buff type;
-        public int  stackCount;
-        public int  tickDuration;
+        public Buff     type;
+        public int      stackCount;
+        public int      tickDuration;
+        public float    startTime;
 
         public void Reset()
         {
             tickDuration = type.tickDuration;
+            startTime = Time.time;
         }
+
+        public float elapsedTime => Time.time - startTime;
+        public float elapsedTimePercentage => (Time.time - startTime) / (type.tickDuration * Globals.tickFrequency);
     }
 
     public enum Type { DOT };
 
+    public Sprite       image;
     public Type         type;
     public int          maxStack = 1;
 

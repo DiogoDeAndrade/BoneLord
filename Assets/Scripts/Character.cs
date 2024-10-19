@@ -29,6 +29,7 @@ public class Character : MonoBehaviour
     public Character    closestEnemy { get; private set; }
     public bool         isMoving => targetPos != null;
     public bool         isDead => (hp <= 0);
+    public Buffs        buffs => _buffs;
 
 
     float       emoteTimer;
@@ -37,7 +38,7 @@ public class Character : MonoBehaviour
     Vector2?    targetPos = null;
     bool        alert = false;
     Vector2     ctOffset;
-    Buffs       buffs;
+    Buffs       _buffs;
 
     public delegate void OnAlert(bool alertEnable);
     public event OnAlert onAlert;
@@ -49,7 +50,7 @@ public class Character : MonoBehaviour
         flash = GetComponent<Flash>();
         emoteTimer = _emoteCooldown.Random();
         hp = _maxHP;
-        buffs = new(this);
+        _buffs = new(this);
 
         PlayerControl.AddCharacter(this);
 
@@ -199,12 +200,12 @@ public class Character : MonoBehaviour
 
     public void ApplyBuff(Buff buff)
     {
-        buffs.Apply(buff);
+        _buffs.Apply(buff);
     }
 
     private void OnRPGTick()
     {
-        buffs.Tick();
+        _buffs.Tick();
     }
 
 
