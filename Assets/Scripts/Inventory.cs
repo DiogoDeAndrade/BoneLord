@@ -6,6 +6,10 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int maxSlots = 25;
 
+    [SerializeField] private Item[] debugItems;
+    [SerializeField] private int    debugInitialGold;
+    [SerializeField] private int    debugInitialSouls;
+
     public delegate void OnChange();
 
     public event OnChange onChange;
@@ -17,10 +21,34 @@ public class Inventory : MonoBehaviour
     }
 
     private Slot[] items;
+    private int    _gold;
+    private int    _souls;
+
+    public int gold => _gold;
+    public int souls => _souls;
 
     public void Awake()
     {
         items = new Slot[maxSlots];
+
+#if UNITY_EDITOR
+        foreach (var item in debugItems)
+        {
+            Add(item);
+        }
+        _gold = debugInitialGold;
+        _souls = debugInitialSouls;
+#endif
+    }
+
+    public void ChangeGold(int delta)
+    {
+        _gold += delta;
+    }
+
+    public void ChangeSouls(int delta)
+    {
+        _souls += delta;
     }
 
     public void Add(Item item)

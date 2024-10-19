@@ -1,7 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class DisplayInventory : UIPanel
 {
+    [SerializeField] TextMeshProUGUI goldText;
+    [SerializeField] TextMeshProUGUI soulText;
+
     Inventory _inventory;
 
     public void SetInventory(Inventory inventory)
@@ -44,5 +48,8 @@ public class DisplayInventory : UIPanel
             Item item = _inventory.GetItem(i);
             items[i].SetItem(item, _inventory.GetItemCount(item));
         }
+
+        goldText.text = $"x{_inventory.gold}";
+        soulText.text = $"x{_inventory.souls}";
     }
 }
