@@ -9,12 +9,12 @@ public class UISummoningCircle : UIPanel
     [SerializeField] private Image          circleImage;
     [SerializeField] private Image          orbImage;
 
-    [SerializeField] private Item[]         debugStartItems;
+    [SerializeField] private ItemDef[]         debugStartItems;
 
     int slotCount = 3;
     Inventory               inventory;
     DisplayInventory        displayInventory;
-    Item                    carryItem;
+    ItemDef                    carryItem;
     List<IngredientSlot>    ingredientSlots;
     Camera                  mainCamera;
     SummoningCircle         summoningCircle;
@@ -29,7 +29,7 @@ public class UISummoningCircle : UIPanel
             {
                 if (ingredient.GetItem(false) == null) return false;
             }
-            List<Item> items = new List<Item>();
+            List<ItemDef> items = new List<ItemDef>();
             foreach (var ingredient in ingredientSlots)
             {
                 items.Add(ingredient.GetItem(false));
@@ -224,7 +224,7 @@ public class UISummoningCircle : UIPanel
                 if (orbTransform.ScreenPointOverlaps(mousePos, mainCamera))
                 {
                     // Do the operation
-                    List<Item> items = new List<Item>();
+                    List<ItemDef> items = new List<ItemDef>();
                     foreach (var ingredient in ingredientSlots)
                     {
                         items.Add(ingredient.GetItem(true));

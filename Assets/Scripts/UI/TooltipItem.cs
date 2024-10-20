@@ -5,7 +5,7 @@ public class TooltipItem : Tooltip
 {
     [SerializeField] TextMeshProUGUI text;
 
-    public void SetItem(Item item)
+    public void SetItem(ItemDef item)
     {
         if (item != null)
         {

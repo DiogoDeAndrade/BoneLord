@@ -5,7 +5,7 @@ public class IngredientSlot : MonoBehaviour
 {
     [SerializeField] private Image slot;
 
-    private Item            item;
+    private ItemDef            item;
     private RectTransform   rectTransform;
 
     private void Start()
@@ -14,7 +14,7 @@ public class IngredientSlot : MonoBehaviour
         SetItem(item);
     }
 
-    public void SetItem(Item item)
+    public void SetItem(ItemDef item)
     {
         this.item = item;
         if ((item != null) && (item.sprite != null))
@@ -28,9 +28,9 @@ public class IngredientSlot : MonoBehaviour
         }
     }
 
-    public Item GetItem(bool remove)
+    public ItemDef GetItem(bool remove)
     {
-        Item prevItem = this.item;
+        ItemDef prevItem = this.item;
         if (remove) SetItem(null);
         return prevItem;
     }

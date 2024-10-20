@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
     [SerializeField]
     private string  _displayName;
     [SerializeField]
-    private float   enemyDetectionRadius = 0.0f;
+    private float   _enemyDetectionRadius = 0.0f;
     [SerializeField]
     private Transform _toolPivot;
     [SerializeField, MinMaxSlider(0, 4)]
@@ -38,6 +38,7 @@ public class Character : MonoBehaviour
     public bool         isMoving => targetPos != null;
     public bool         isDead => (hp <= 0);
     public Buffs        buffs => _buffs;
+    public float        enemyDetectionRadius => _enemyDetectionRadius;
 
 
     float       emoteTimer;
@@ -48,7 +49,7 @@ public class Character : MonoBehaviour
     bool        alert = false;
     Vector2     ctOffset;
     Buffs       _buffs;
-    Item        currentTool;
+    ItemDef        currentTool;
     GameObject  toolObj;
     DropSystem  dropSystem;
 
@@ -158,9 +159,9 @@ public class Character : MonoBehaviour
         Character   closestCharacter = null;
         float       closestDist = float.MaxValue;
 
-        if (enemyDetectionRadius > 0)
+        if (_enemyDetectionRadius > 0)
         {
-            var colliders = Physics2D.OverlapCircleAll(transform.position, enemyDetectionRadius, 1 << gameObject.layer);
+            var colliders = Physics2D.OverlapCircleAll(transform.position, _enemyDetectionRadius, 1 << gameObject.layer);
             foreach (var collider in colliders)
             {
                 // Check if it is an item
@@ -248,7 +249,7 @@ public class Character : MonoBehaviour
         _maxHP = maxHP;
     }
 
-    internal void SetTool(Item tool)
+    internal void SetTool(ItemDef tool)
     {
         if (_toolPivot == null) return;
 
@@ -267,10 +268,10 @@ public class Character : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (enemyDetectionRadius > 0)
+        if (_enemyDetectionRadius > 0)
         {
             Gizmos.color = new Color(0.25f, 0.0f, 0.0f, 1.0f);
-            Gizmos.DrawWireSphere(transform.position, enemyDetectionRadius);
+            Gizmos.DrawWireSphere(transform.position, _enemyDetectionRadius);
         }
     }
 

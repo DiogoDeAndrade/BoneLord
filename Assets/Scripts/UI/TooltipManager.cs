@@ -19,7 +19,7 @@ public class TooltipManager : MonoBehaviour
         rectTransform = transform as RectTransform;
     }
 
-    public void SetItem(Item item)
+    public void SetItem(ItemDef item)
     {
         tooltipItem.SetItem(item);
     }

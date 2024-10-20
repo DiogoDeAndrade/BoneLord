@@ -20,7 +20,7 @@ public class SummoningCircle : MonoBehaviour
         playerCharacter = gameObject.FindObjectOfTypeWithHypertag<Character>(boneLord);
     }
 
-    public bool IsValid(List<Item> items)
+    public bool IsValid(List<ItemDef> items)
     {
         if (summonCR != null) return false;
 
@@ -38,17 +38,17 @@ public class SummoningCircle : MonoBehaviour
         return true;
     }
 
-    public void Summon(List<Item> items)
+    public void Summon(List<ItemDef> items)
     {
         if (summonCR != null) return;
 
         summonCR = StartCoroutine(SummonCR(items));
     }
 
-    IEnumerator SummonCR(List<Item> items)
+    IEnumerator SummonCR(List<ItemDef> items)
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        Color originalColor = spriteRenderer.color;
+        SpriteRenderer circleSpriteRenderer = GetComponent<SpriteRenderer>();
+        Color circleOriginalColor = circleSpriteRenderer.color;
 
         playerCharacter?.HoldCast(true);
 
@@ -64,15 +64,18 @@ public class SummoningCircle : MonoBehaviour
             dat.time = 0.5f;
             dat.fadeOut = true;
             var spr = go.AddComponent<SpriteRenderer>();
-            spr.color = originalColor.ChangeAlpha(0.5f);
-            spr.sprite = spriteRenderer.sprite;
+            spr.color = circleOriginalColor.ChangeAlpha(0.5f);
+            spr.sprite = circleSpriteRenderer.sprite;
             var mov = go.AddComponent<MoveAnim>();
             mov.speed = Vector3.up * 50.0f;
         }
 
         // Count bones
-        Item    tool = null;
-        int     nBones = 0;
+        ItemDef     tool = null;
+        int         nBones = 0;
+        int         HP = 10;
+        Color       color = Globals.defaultSkeletonColor;
+        int         colorPriority = -int.MaxValue;
         foreach (var item in items)
         {
             if (item.IsA(boneItemTag))
@@ -83,12 +86,24 @@ public class SummoningCircle : MonoBehaviour
             {
                 tool = item;
             }
+            HP += (item.hp == 0) ? (Globals.defaultHPPerItem) : (item.hp);
+            if (item.hasColor)
+            {
+                if (item.colorPriority > colorPriority)
+                {
+                    colorPriority = item.colorPriority;
+                    color = item.color;
+                }
+            }
         }
 
         // Spawn creature
         Character newSkeleton = Instantiate(skeletonPrefab, transform.position, Quaternion.identity);
         newSkeleton.displayName = "Skeleton";
-        newSkeleton.SetMaxHP(10 + nBones * 15);
+        newSkeleton.SetMaxHP(HP);
+        var spriteRenderer = newSkeleton.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = color;
+        var flash = newSkeleton.GetComponent<Flash>();
 
         if (nBones == items.Count)
         {
@@ -115,7 +130,6 @@ public class SummoningCircle : MonoBehaviour
 
         yield return null;
 
-        Flash flash = newSkeleton.GetComponent<Flash>();
         flash?.Execute(0.5f, Color.cyan, Color.cyan.ChangeAlpha(0));
 
         for (int i = 0; i < 5; i++)
@@ -130,8 +144,8 @@ public class SummoningCircle : MonoBehaviour
             dat.time = 0.5f;
             dat.fadeOut = true;
             var spr = go.AddComponent<SpriteRenderer>();
-            spr.color = originalColor.ChangeAlpha(0.5f);
-            spr.sprite = spriteRenderer.sprite;
+            spr.color = circleOriginalColor.ChangeAlpha(0.5f);
+            spr.sprite = circleSpriteRenderer.sprite;
             var mov = go.AddComponent<MoveAnim>();
             mov.speed = Vector3.up * 50.0f;
         }

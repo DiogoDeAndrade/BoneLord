@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: c8c277e448017f64597583eb61cbb024, type: 3}
   displayName: Skull
+  hp: 15
+  hasColor: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorPriority: 0
   categories:
   - {fileID: 11400000, guid: 01875aa7039dab443a83575c25ab864d, type: 2}

@@ -1,12 +1,19 @@
+using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Bonelord/Item")]
-public class Item : ScriptableObject
+public class ItemDef : ScriptableObject
 {
     public Sprite           sprite;
     public string           displayName;
+    public int              hp;
+    public bool             hasColor;
+    [ShowIf("hasColor")]
+    public Color            color = Color.white;
+    [ShowIf("hasColor")]
+    public int              colorPriority;
     public List<Hypertag>   categories;
 
     internal bool IsA(Hypertag tag)

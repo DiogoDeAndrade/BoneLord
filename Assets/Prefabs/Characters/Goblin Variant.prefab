@@ -32,6 +32,14 @@ PrefabInstance:
       propertyPath: selectionOffset.y
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4990346238852152096, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
+      propertyPath: enemyDetectionRadius
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990346238852152096, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
+      propertyPath: _enemyDetectionRadius
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5124644928453288994, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
       propertyPath: m_Name
       value: Goblin Variant
@@ -95,6 +103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5124644928453288994, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8294525466458443577}
+    - targetCorrespondingSourceObject: {fileID: 5124644928453288994, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8165306233039010742}
   m_SourcePrefab: {fileID: 100100000, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
 --- !u!1 &1702952060603839702 stripped
 GameObject:
@@ -119,3 +130,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   boneLord: {fileID: 11400000, guid: a25fbfbfa42a07c4a9cba4545637c2e4, type: 2}
+--- !u!114 &8165306233039010742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702952060603839702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ce411a57719184486a7c3ba3f8a4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

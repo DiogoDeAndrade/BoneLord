@@ -49,7 +49,7 @@ public class DisplayInventory : UIPanel
     {
         for (int i = 0; i < items.Length; i++)
         {
-            Item item = _inventory.GetItem(i);
+            ItemDef item = _inventory.GetItem(i);
             int  count = _inventory.GetItemCount(i);
             
             items[i].SetItem(i, item, count);

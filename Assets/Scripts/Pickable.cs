@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pickable : MonoBehaviour
 {
     [SerializeField]
-    public Item    item;
+    public ItemDef    item;
    
     void Start()
     {
@@ -16,7 +16,7 @@ public class Pickable : MonoBehaviour
     {
         
     }
-    internal void SetItem(Item item)
+    internal void SetItem(ItemDef item)
     {
         this.item = item;
 

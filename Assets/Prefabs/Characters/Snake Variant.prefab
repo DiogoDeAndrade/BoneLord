@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: enemyDetectionRadius
       value: 45.83
       objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: _enemyDetectionRadius
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
       propertyPath: m_Name
       value: Snake Variant

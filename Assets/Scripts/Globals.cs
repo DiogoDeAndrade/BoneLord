@@ -6,7 +6,7 @@ public class Globals : MonoBehaviour
     [Serializable]
     struct ToolPrefab
     {
-        public Item         tool;
+        public ItemDef         tool;
         public GameObject   prefab;
     }
 
@@ -30,6 +30,10 @@ public class Globals : MonoBehaviour
     Color _damagePoison = Color.white;
     [SerializeField, Header("Tool Prefabs")]
     ToolPrefab[] toolPrefabs;
+    [SerializeField, Header("Default Properties")]
+    Color _defaultSkeletonColor = Color.white;
+    [SerializeField]
+    int   _defaultHPPerItem = 10;
 
     public delegate void OnTick();
     
@@ -38,7 +42,6 @@ public class Globals : MonoBehaviour
     static Globals Instance;
 
     float tickTimer;
-
     private void Awake()
     {
         Instance = this;
@@ -73,8 +76,10 @@ public class Globals : MonoBehaviour
     }
 
     public static float tickFrequency => Instance._tickFrequency;
+    internal static int defaultHPPerItem => Instance._defaultHPPerItem;
+    public static Color defaultSkeletonColor => Instance._defaultSkeletonColor;
 
-    public static GameObject GetPrefab(Item item)
+    public static GameObject GetPrefab(ItemDef item)
     {
         if (Instance.toolPrefabs == null) return null;
 

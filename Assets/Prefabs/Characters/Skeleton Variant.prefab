@@ -106,6 +106,10 @@ PrefabInstance:
       propertyPath: enemyDetectionRadius
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 4990346238852152096, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
+      propertyPath: _enemyDetectionRadius
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 5124644928453288994, guid: edde824e413bdc64ab4a96877cc9ba49, type: 3}
       propertyPath: m_Name
       value: Skeleton Variant

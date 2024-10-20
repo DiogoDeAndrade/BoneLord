@@ -5,7 +5,7 @@ public class DropSystem : MonoBehaviour
     [System.Serializable]
     struct DropList
     {
-        public Item     item;
+        public ItemDef     item;
         public float    prob;
     }
 
@@ -43,7 +43,7 @@ public class DropSystem : MonoBehaviour
         }
     }
 
-    void Drop(Item item)
+    void Drop(ItemDef item)
     {
         var newItem = Instantiate(itemPrefab, transform.position + Vector3.down * Random.Range(10.0f, 20.0f) + Vector3.right * Random.Range(-40.0f, 40.0f), Quaternion.identity);
         newItem.SetItem(item);

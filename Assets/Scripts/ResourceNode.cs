@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ResourceNode : MonoBehaviour
 {
-    [SerializeField] Item[] compatibleTools;
+    [SerializeField] ItemDef[] compatibleTools;
 
     DropSystem dropSystem;
 
@@ -12,7 +12,7 @@ public class ResourceNode : MonoBehaviour
         dropSystem = GetComponent<DropSystem>();
     }
 
-    internal bool isCompatible(Item tool)
+    internal bool isCompatible(ItemDef tool)
     {
         if (compatibleTools != null)
         {

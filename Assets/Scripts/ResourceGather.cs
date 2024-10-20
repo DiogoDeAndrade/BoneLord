@@ -10,7 +10,7 @@ public class ResourceGather : MonoBehaviour
     private Controllable    controllable;
 
     private float           wanderCooldown = 5.0f;
-    private Item            tool;
+    private ItemDef            tool;
     private ResourceNode    targetNode;
     private float           mineTimer;
     private LayerMask       nodeLayer;
@@ -112,7 +112,7 @@ public class ResourceGather : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, searchRadius);
     }
 
-    internal void SetTool(Item tool)
+    internal void SetTool(ItemDef tool)
     {
         this.tool = tool;
     }

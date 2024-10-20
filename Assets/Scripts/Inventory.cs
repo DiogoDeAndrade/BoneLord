@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int maxSlots = 25;
 
-    [SerializeField] private Item[] debugItems;
+    [SerializeField] private ItemDef[] debugItems;
     [SerializeField] private int    debugInitialGold;
     [SerializeField] private int    debugInitialSouls;
 
@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
 
     class Slot
     {
-        public Item item;
+        public ItemDef item;
         public int  count;
     }
 
@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
         _souls += delta;
     }
 
-    public void Add(Item item)
+    public void Add(ItemDef item)
     {
         foreach (var slot in items)
         {
@@ -81,7 +81,7 @@ public class Inventory : MonoBehaviour
         onChange?.Invoke();
     }
 
-    public void Remove(Item item)
+    public void Remove(ItemDef item)
     {
         foreach (var slot in items)
         {
@@ -115,7 +115,7 @@ public class Inventory : MonoBehaviour
         return;
     }
 
-    public void Set(int slot, Item item, int count)
+    public void Set(int slot, ItemDef item, int count)
     {
         if (items[slot] == null) items[slot] = new Slot();
 
@@ -156,7 +156,7 @@ public class Inventory : MonoBehaviour
         return null;
     }
       
-    public Item GetItem(int index)
+    public ItemDef GetItem(int index)
     {
         if (items[index] == null) return null;
 
@@ -169,7 +169,7 @@ public class Inventory : MonoBehaviour
         return items[index].count;
     }
 
-    public int GetItemCount(Item item)
+    public int GetItemCount(ItemDef item)
     {
         if (item == null) return 0;
 

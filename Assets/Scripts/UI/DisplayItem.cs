@@ -9,12 +9,12 @@ public class DisplayItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI    text;
 
     private int             _slot;
-    private Item            _item;
+    private ItemDef            _item;
     private int             _count;
     private RectTransform   rectTransform;
 
     public int  slot => _slot;
-    public Item item => _item;
+    public ItemDef item => _item;
     public int  count => _count;
 
     private void Start()
@@ -22,7 +22,7 @@ public class DisplayItem : MonoBehaviour
         rectTransform = transform as RectTransform;
     }
 
-    public void SetItem(int slot, Item item, int count)
+    public void SetItem(int slot, ItemDef item, int count)
     {
         _slot = slot;
         _item = item;

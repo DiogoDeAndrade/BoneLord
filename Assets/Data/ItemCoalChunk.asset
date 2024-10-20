@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: -2097522495008807667, guid: b65a15181e8abaa4db919a08742711c3, type: 3}
   displayName: Coal Chunk
+  hp: 0
+  hasColor: 1
+  color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+  colorPriority: -5
   categories:
   - {fileID: 11400000, guid: 9da42d1d650f49d439f16d2d55f2c725, type: 2}

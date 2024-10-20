@@ -11,8 +11,7 @@ public class Gatherer : MonoBehaviour
     private Controllable    controllable;
     private Pickable        targetItem;
 
-    private Item[]      inventory;
-    private bool        returning;
+    private ItemDef[]      inventory;
     private Inventory   playerInventory;
     private float       wanderCooldown = 5.0f;
 
@@ -20,7 +19,7 @@ public class Gatherer : MonoBehaviour
     {
         character = GetComponent<Character>();
         controllable = GetComponent<Controllable>();
-        inventory = new Item[1];
+        inventory = new ItemDef[1];
         playerInventory = gameObject.FindObjectOfTypeWithHypertag<Inventory>(boneLord);
     }
 
@@ -28,7 +27,7 @@ public class Gatherer : MonoBehaviour
     {
         if (!character.isMoving)
         {
-            if (returning)
+            if (IsInventoryFull())
             {
                 targetItem = null;
                 character.MoveTo(playerInventory.transform.position);
@@ -79,14 +78,13 @@ public class Gatherer : MonoBehaviour
         }
         else
         {
-            if (returning) 
+            if (IsInventoryFull()) 
             {
                 if (Vector3.Distance(playerInventory.transform.position, transform.position) < grabRadius)
                 {
                     if (!playerInventory.isFull)
                     {
                         // Returned
-                        returning = false;
                         foreach (var item in inventory)
                         {
                             if (item != null)
@@ -124,12 +122,9 @@ public class Gatherer : MonoBehaviour
                 inventory[i] = targetItem.item;
                 targetItem = null;
                 Destroy(pickable.gameObject);
-                returning = IsInventoryFull();
                 return;
             }
         }
-
-        returning = true;
     }
 
     bool IsInventoryFull()
