@@ -87,5 +87,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4121923498127237441}
+    - targetCorrespondingSourceObject: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5932225109296790176}
   m_SourcePrefab: {fileID: 100100000, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+--- !u!1 &4234661281365270234 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+  m_PrefabInstance: {fileID: 6173783224894425366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4121923498127237441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234661281365270234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5827f74eb61e345b0b9af5d30e7dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRadius: 35
+  damageDelayTime: 0.6
+  attackCooldown: 1
+  baseAttackPower: 2
+  damageType: 0
+  buffsToApply: []
+--- !u!114 &5932225109296790176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234661281365270234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d84bc2d05f8b0d7468185b3bc561a084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonelordTag: {fileID: 11400000, guid: a25fbfbfa42a07c4a9cba4545637c2e4, type: 2}
+  stepSize: 50
+  cooldown: 5

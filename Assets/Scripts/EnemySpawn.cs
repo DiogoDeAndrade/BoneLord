@@ -7,8 +7,8 @@ public class EnemySpawn : MonoBehaviour
     public GameObject[] spawnPrefab;
     public Transform[]  spawnPoints;
 
-    float spawnTimer;
-    int   spawnCount = 1;
+    float   spawnTimer;
+    float   spawnCount = 1;
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class EnemySpawn : MonoBehaviour
 
     void SpawnEnemies()
     {
-        for (int i = 0; i < spawnCount; i++)
+        for (int i = 0; i < Mathf.FloorToInt(spawnCount); i++)
         {
             int spawnPointIndex = Random.Range(0, spawnPoints.Length);
             int prefabIndex = Random.Range(0, spawnPrefab.Length);
@@ -41,6 +41,6 @@ public class EnemySpawn : MonoBehaviour
             Instantiate(spawnPrefab[prefabIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
         }
 
-        spawnCount = Mathf.Clamp(spawnCount + 1, 0, spawnPoints.Length);
+        spawnCount = Mathf.Clamp(spawnCount + 0.25f, 0, spawnPoints.Length);
     }
 }

@@ -1,9 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using static UnityEngine.Rendering.DebugUI;
-using System;
-using System.Runtime.CompilerServices;
-using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -32,7 +29,7 @@ public class PlayerControl : MonoBehaviour
     private Character               playerCharacter;
     private Character               summoningCircleCharacter;
     private DisplayInventory        inventoryDisplay;
-    private UISummoningCircle  summoningCircle;
+    private UISummoningCircle       summoningCircle;
     private Sprite                  defaultCursor;
 
     void Awake()
@@ -149,6 +146,12 @@ public class PlayerControl : MonoBehaviour
         {
             currentSelection.Deselect();
             currentSelection = null;
+        }
+
+        if ((playerCharacter) && (playerCharacter.isDead))
+        {
+            // Player died, show game over
+            SceneManager.LoadScene("GameOver");
         }
     }
 
