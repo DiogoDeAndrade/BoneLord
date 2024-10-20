@@ -1,9 +1,6 @@
 using NaughtyAttributes;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Character : MonoBehaviour
 {
@@ -25,6 +22,10 @@ public class Character : MonoBehaviour
     private Transform _toolPivot;
     [SerializeField, MinMaxSlider(0, 4)]
     private Vector2Int dropCount;
+    [SerializeField, Range(0.0f, 1.0f)]
+    private float      soulProbability = 0.25f;
+    [SerializeField, ShowIf("needsSoulOrb")]
+    private GameObject soulOrbPrefab;
 
     public float        moveSpeed => _moveSpeed;
     public bool         isPlayer => _faction == Faction.Player;
@@ -40,6 +41,7 @@ public class Character : MonoBehaviour
     public bool         isDead => (hp <= 0);
     public Buffs        buffs => _buffs;
     public float        enemyDetectionRadius => _enemyDetectionRadius;
+    public bool         needsSoulOrb => soulProbability > 0;
 
 
     float       emoteTimer;
@@ -232,6 +234,15 @@ public class Character : MonoBehaviour
                 for (int i = 0; i < r; i++)
                 {
                     dropSystem?.Drop();
+                }
+
+                if ((soulProbability > 0) && (soulOrbPrefab))
+                {
+                    float r2 = Random.Range(0.0f, 1.0f);
+                    if (r2 < soulProbability)
+                    {
+                        Instantiate(soulOrbPrefab, transform.position, Quaternion.identity);
+                    }
                 }
             }
 

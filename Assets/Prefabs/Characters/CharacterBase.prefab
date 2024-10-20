@@ -257,7 +257,9 @@ MonoBehaviour:
   _moveSpeed: 200
   _maxHP: 20
   _displayName: Undefined Name
-  enemyDetectionRadius: 0
+  _enemyDetectionRadius: 0
+  _toolPivot: {fileID: 0}
+  dropCount: {x: 0, y: 0}
 --- !u!114 &5607888125798724250
 MonoBehaviour:
   m_ObjectHideFlags: 0

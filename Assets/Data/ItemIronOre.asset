@@ -15,7 +15,7 @@ MonoBehaviour:
   sprite: {fileID: 1524554980409304733, guid: 1a8ead0b130ad6742b84e7df8592f093, type: 3}
   displayName: Iron Ore
   hp: 20
-  title: 
+  title: Metal
   hasColor: 1
   color: {r: 0.48949805, g: 0.80784833, b: 0.8301887, a: 1}
   colorPriority: 0

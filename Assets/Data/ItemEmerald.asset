@@ -15,7 +15,7 @@ MonoBehaviour:
   sprite: {fileID: 2870129717158860269, guid: 1a8ead0b130ad6742b84e7df8592f093, type: 3}
   displayName: Emerald
   hp: 1
-  title: 
+  title: Harmonious
   hasColor: 1
   color: {r: 0.47019783, g: 0.8301887, b: 0.44250622, a: 1}
   colorPriority: 5

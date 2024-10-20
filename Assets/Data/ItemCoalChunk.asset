@@ -15,7 +15,7 @@ MonoBehaviour:
   sprite: {fileID: -2097522495008807667, guid: 1a8ead0b130ad6742b84e7df8592f093, type: 3}
   displayName: Coal Chunk
   hp: 0
-  title: 
+  title: Brittle
   hasColor: 1
   color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
   colorPriority: -5

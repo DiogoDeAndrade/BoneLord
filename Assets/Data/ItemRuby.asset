@@ -15,7 +15,7 @@ MonoBehaviour:
   sprite: {fileID: -3216658671942276223, guid: 1a8ead0b130ad6742b84e7df8592f093, type: 3}
   displayName: Ruby
   hp: 1
-  title: 
+  title: Fiery
   hasColor: 1
   color: {r: 0.81960785, g: 0.4295132, b: 0.34509805, a: 1}
   colorPriority: 5
