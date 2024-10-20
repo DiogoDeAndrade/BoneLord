@@ -35,6 +35,7 @@ public class Inventory : MonoBehaviour
         items = new Slot[maxSlots];
 
 #if UNITY_EDITOR
+        LoadDebugItems();
         foreach (var item in debugItems)
         {
             Add(item);
@@ -180,6 +181,25 @@ public class Inventory : MonoBehaviour
         }
 
         return 0;
+    }
+
+    void LoadDebugItems()
+    {
+        if (debugItems == null) return;
+        foreach (var item in debugItems)
+        {
+            Add(item);
+        }
+        _gold = debugInitialGold;
+        _souls = debugInitialSouls;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            LoadDebugItems();
+        }
     }
 
 }

@@ -57,12 +57,31 @@ public class Buffs
 
     public void Tick()
     {
+        List<Buff.Instance> toDelete = new();
+
         foreach (var buff in activeBuffs)
         {
-            buff.tickDuration--;
-            buff.type.Run(buff, character);
+            if (buff.tickDuration > 0)
+            {
+                buff.tickDuration--;
+                if (buff.tickDuration <= 0) toDelete.Add(buff);
+            }
+            buff.type.RunTick(buff, character);
         }
 
-        activeBuffs.RemoveAll((b) => b.tickDuration <= 0);
+        activeBuffs.RemoveAll((b) => toDelete.IndexOf(b) != -1);
+    }
+
+    public (float, DamageType) ModifyDamage(float damage, DamageType damageType)
+    {
+        var processedDamage = damage;
+        var processedDamageType = damageType;
+
+        foreach (var buff in activeBuffs)
+        {
+            (processedDamage, processedDamageType) = buff.type.ModifyDamage(buff, character, processedDamage, processedDamageType);
+        }
+
+        return (processedDamage, processedDamageType);
     }
 }

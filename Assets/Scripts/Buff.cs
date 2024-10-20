@@ -19,24 +19,38 @@ public class Buff : ScriptableObject
         }
 
         public float elapsedTime => Time.time - startTime;
-        public float elapsedTimePercentage => (Time.time - startTime) / (type.tickDuration * Globals.tickFrequency);
+        public float elapsedTimePercentage => (tickDuration == 0) ? (0.0f) : ((Time.time - startTime) / (type.tickDuration * Globals.tickFrequency));
     }
 
-    public enum Type { DOT };
+    public enum Type { DOT, ModifyHPChange };
+    public enum FilterChange { Negative, Any, Positive };
 
+    [ResizableTextArea]
+    public string       description;
     public Sprite       image;
     public Type         type;
     public int          maxStack = 1;
 
-    [ShowIf("isDamage")]
+    [ShowIf("needDamageType")]
     public DamageType   damageType;
     [ShowIf("needDuration")]
     public int          tickDuration;
     [ShowIf("isDamage")]
     public int          damagePerTick;
+    [ShowIf("needFilter")]
+    public FilterChange filterChange = FilterChange.Any;
+    [ShowIf("isModify")]
+    public float        multiplier = 1.0f;
+    [ShowIf("isModify")]
+    public float        constant = 0;
+    [ShowIf("isModify")]
+    public bool         anyDamageType = true;
 
     public bool isDamage => (type == Type.DOT);
-    public bool needDuration => (type == Type.DOT);
+    public bool isModify => (type == Type.ModifyHPChange);
+    public bool needDuration => (type == Type.DOT) || (type == Type.ModifyHPChange);
+    public bool needDamageType => (type == Type.DOT) || ((type == Type.ModifyHPChange) && (!anyDamageType));
+    public bool needFilter => (type == Type.ModifyHPChange);
 
     public Instance Start()
     {
@@ -51,12 +65,15 @@ public class Buff : ScriptableObject
         return newInstance;
     }
 
-    public bool Run(Instance instance, Character character)
+    public bool RunTick(Instance instance, Character character)
     {
         switch (type)
         {
             case Type.DOT:
                 return RunDOT(instance, character);
+            case Type.ModifyHPChange:
+                // Nothing to do on a tick, it just affects damage that goes in the system
+                break;
             default:
                 break;
         }
@@ -69,5 +86,27 @@ public class Buff : ScriptableObject
         character.DealDamage(damagePerTick, damageType);
 
         return true;
+    }
+
+    internal (float, DamageType) ModifyDamage(Instance buff, Character character, float damage, DamageType damageType)
+    {
+        if (!anyDamageType)
+        {
+            if (damageType != this.damageType)
+            {
+                return (damage, damageType);
+            }
+        }
+        switch (filterChange)
+        {
+            case FilterChange.Negative:
+                if (damage >= 0) return (damage, damageType);
+                break;
+            case FilterChange.Positive:
+                if (damage <= 0) return (damage, damageType);
+                break;
+        }
+
+        return (damage * multiplier + constant, damageType);
     }
 }

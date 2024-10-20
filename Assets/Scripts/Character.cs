@@ -56,15 +56,23 @@ public class Character : MonoBehaviour
     public delegate void OnAlert(bool alertEnable);
     public event OnAlert onAlert;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         flash = GetComponent<Flash>();
         dropSystem = GetComponent<DropSystem>();
+        _buffs = new(this);
+
+        if (_toolPivot)
+        {
+            animTool = _toolPivot.GetComponent<Animator>();
+        }
+    }
+
+    void Start()
+    {
         emoteTimer = _emoteCooldown.Random();
         hp = _maxHP;
-        _buffs = new(this);
 
         PlayerControl.AddCharacter(this);
 
@@ -76,11 +84,6 @@ public class Character : MonoBehaviour
         }
 
         Globals.onTick += OnRPGTick;
-
-        if (_toolPivot)
-        {
-            animTool = _toolPivot.GetComponent<Animator>();
-        }
     }
 
     private void OnDestroy()
@@ -209,10 +212,12 @@ public class Character : MonoBehaviour
     {
         if (hp > 0)
         {
-            hp = Mathf.Clamp(hp - damage, 0, maxHP);
+            (var actualDamage, var actualDamageType) = buffs.ModifyDamage(-damage, damageType);
 
-            Color color = Globals.GetColor(damageType);
-            CombatTextManager.SpawnText(gameObject, ctOffset, -damage, "{0}", color, color.ChangeAlpha(0), 1.0f, 1.0f);
+            hp = Mathf.Clamp(hp + actualDamage, 0, maxHP);
+
+            Color color = Globals.GetColor(actualDamageType);
+            CombatTextManager.SpawnText(gameObject, ctOffset, -actualDamage, "{0}", color, color.ChangeAlpha(0), 1.0f, 1.0f);
 
             flash.Execute(0.25f, color, color.ChangeAlpha(0));
 

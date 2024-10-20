@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b5a82f7ec4a5e4e87379926cbf3fbb, type: 3}
   m_Name: ItemCopperOre
   m_EditorClassIdentifier: 
-  sprite: {fileID: -4745072989761975449, guid: b65a15181e8abaa4db919a08742711c3, type: 3}
+  sprite: {fileID: -4745072989761975449, guid: 1a8ead0b130ad6742b84e7df8592f093, type: 3}
   displayName: Copper Ore
   hp: 5
+  title: 
   hasColor: 1
   color: {r: 0.8113208, g: 0.58044964, b: 0.13394445, a: 1}
   colorPriority: 0
+  buffsToApply: []
   categories:
   - {fileID: 11400000, guid: 9da42d1d650f49d439f16d2d55f2c725, type: 2}

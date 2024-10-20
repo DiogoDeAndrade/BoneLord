@@ -71,9 +71,10 @@ public class SummoningCircle : MonoBehaviour
         }
 
         // Count bones
+        string      skeletonName = "Skeleton";
         ItemDef     tool = null;
         int         nBones = 0;
-        int         HP = 10;
+        int         HP = 5;
         Color       color = Globals.defaultSkeletonColor;
         int         colorPriority = -int.MaxValue;
         foreach (var item in items)
@@ -95,19 +96,30 @@ public class SummoningCircle : MonoBehaviour
                     color = item.color;
                 }
             }
+            if (item.title != "") skeletonName = $"{item.title} {skeletonName}";
         }
 
         // Spawn creature
         Character newSkeleton = Instantiate(skeletonPrefab, transform.position, Quaternion.identity);
-        newSkeleton.displayName = "Skeleton";
+        newSkeleton.displayName = skeletonName;
         newSkeleton.SetMaxHP(HP);
+        foreach (var item in items)
+        {
+            if (item.buffsToApply != null)
+            {
+                foreach (var buff in item.buffsToApply)
+                {
+                    newSkeleton.ApplyBuff(buff);
+                }
+            }
+        }
         var spriteRenderer = newSkeleton.GetComponent<SpriteRenderer>();
         spriteRenderer.color = color;
         var flash = newSkeleton.GetComponent<Flash>();
 
         if (nBones == items.Count)
         {
-            newSkeleton.displayName = "Buff Skeleton";
+            newSkeleton.displayName = "Bony Skeleton";
         }
         if (tool == null)
         {
@@ -125,6 +137,8 @@ public class SummoningCircle : MonoBehaviour
             {
                 var miner = newSkeleton.gameObject.AddComponent<ResourceGather>();
                 miner.SetTool(tool);
+
+                newSkeleton.gameObject.AddComponent<Coward>();
             }
         }
 

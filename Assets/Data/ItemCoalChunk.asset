@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b5a82f7ec4a5e4e87379926cbf3fbb, type: 3}
   m_Name: ItemCoalChunk
   m_EditorClassIdentifier: 
-  sprite: {fileID: -2097522495008807667, guid: b65a15181e8abaa4db919a08742711c3, type: 3}
+  sprite: {fileID: -2097522495008807667, guid: 1a8ead0b130ad6742b84e7df8592f093, type: 3}
   displayName: Coal Chunk
   hp: 0
+  title: 
   hasColor: 1
   color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
   colorPriority: -5
+  buffsToApply:
+  - {fileID: 11400000, guid: d58c07e93d3311045835faf034191d97, type: 2}
   categories:
   - {fileID: 11400000, guid: 9da42d1d650f49d439f16d2d55f2c725, type: 2}

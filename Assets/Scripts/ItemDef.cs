@@ -8,12 +8,15 @@ public class ItemDef : ScriptableObject
 {
     public Sprite           sprite;
     public string           displayName;
+    [Header("Skeleton Summon Properties")]
     public int              hp;
+    public string           title;
     public bool             hasColor;
     [ShowIf("hasColor")]
     public Color            color = Color.white;
     [ShowIf("hasColor")]
     public int              colorPriority;
+    public List<Buff>       buffsToApply;
     public List<Hypertag>   categories;
 
     internal bool IsA(Hypertag tag)

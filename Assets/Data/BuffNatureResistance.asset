@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67e33c168e88e214788e66a45c538080, type: 3}
-  m_Name: BuffWeakPoison
+  m_Name: BuffNatureResistance
   m_EditorClassIdentifier: 
-  description: 3 ticks of 1 poison damage
-  image: {fileID: 21300000, guid: 78779645502afbb478c7403a802a5b24, type: 3}
-  type: 0
+  description: Takes half as much nature damage (50% nature damage resistance)
+  image: {fileID: 21300000, guid: 454649d4499683749b352fa840106e62, type: 3}
+  type: 1
   maxStack: 1
   damageType: 4
-  tickDuration: 3
+  tickDuration: 0
   damagePerTick: 1
-  filterChange: 1
-  multiplier: 1
+  filterChange: 0
+  multiplier: 0.5
   constant: 0
-  anyDamageType: 1
+  anyDamageType: 0

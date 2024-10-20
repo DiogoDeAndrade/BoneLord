@@ -69,7 +69,7 @@ public class Globals : MonoBehaviour
             case DamageType.Fire: return Instance._damageFire;
             case DamageType.Ice: return Instance._damageIce;
             case DamageType.Magic: return Instance._damageMagic;
-            case DamageType.Poison: return Instance._damagePoison;
+            case DamageType.Nature: return Instance._damagePoison;
         }
 
         return Color.white;

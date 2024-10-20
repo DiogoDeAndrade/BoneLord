@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b5a82f7ec4a5e4e87379926cbf3fbb, type: 3}
   m_Name: ItemEmerald
   m_EditorClassIdentifier: 
-  sprite: {fileID: 2870129717158860269, guid: b65a15181e8abaa4db919a08742711c3, type: 3}
+  sprite: {fileID: 2870129717158860269, guid: 1a8ead0b130ad6742b84e7df8592f093, type: 3}
   displayName: Emerald
   hp: 1
+  title: 
   hasColor: 1
   color: {r: 0.18672843, g: 0.8018868, b: 0.13995194, a: 1}
   colorPriority: 5
+  buffsToApply:
+  - {fileID: 11400000, guid: 9bf7336d61857d84e8cf8edee4487ede, type: 2}
   categories:
   - {fileID: 11400000, guid: 11be29ac76befeb4ea786efcc72002b0, type: 2}
