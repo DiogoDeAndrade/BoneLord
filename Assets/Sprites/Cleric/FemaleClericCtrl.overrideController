@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FemaleClericCtrl
+  m_Controller: {fileID: 9100000, guid: 08f64c76b0b5e0041856ec09b0231242, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: bbc3e04aeaabeac46b6fdc01336044ca, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cf020bc4e108ec2479a87275f6972445, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f952ff66cb2d2d04d8e7fa1628e756f6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ab75ea4a0938f7648ac92b30fdda68b2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 45a1eabae22c7c7448ad0ee2e12e76d0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f1abd41672a954841a41c110d14ad520, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e2e979277aca47846b940597203a5678, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 39056200f1f020a4a9ea77bb2c1c8bc8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b0d0470639fe1d046930174518e94c21, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 740a0013f04d295439aa93845e3056e9, type: 2}

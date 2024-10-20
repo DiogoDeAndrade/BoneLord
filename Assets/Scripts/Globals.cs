@@ -34,6 +34,8 @@ public class Globals : MonoBehaviour
     Color _defaultSkeletonColor = Color.white;
     [SerializeField]
     int   _defaultHPPerItem = 10;
+    [SerializeField]
+    Rect _extents;
 
     public delegate void OnTick();
     
@@ -79,6 +81,8 @@ public class Globals : MonoBehaviour
     internal static int defaultHPPerItem => Instance._defaultHPPerItem;
     public static Color defaultSkeletonColor => Instance._defaultSkeletonColor;
 
+    public static Rect extents => Instance._extents;
+
     public static GameObject GetPrefab(ItemDef item)
     {
         if (Instance.toolPrefabs == null) return null;
@@ -99,5 +103,11 @@ public class Globals : MonoBehaviour
             tickTimer = _tickFrequency;
             onTick?.Invoke();
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(_extents.center, _extents.size);
     }
 }

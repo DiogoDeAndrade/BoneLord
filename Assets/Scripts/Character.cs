@@ -192,7 +192,14 @@ public class Character : MonoBehaviour
 
     public void MoveTo(Vector2 targetPos)
     {
-        this.targetPos = targetPos;
+        // Check if this position is within the extents
+        Vector2 clampedPos = targetPos;
+
+        var extents = Globals.extents;
+        clampedPos.x = Mathf.Clamp(clampedPos.x, extents.min.x, extents.max.x);
+        clampedPos.y = Mathf.Clamp(clampedPos.y, extents.min.y, extents.max.y);
+
+        this.targetPos = clampedPos;
     }
 
     public void Stop()

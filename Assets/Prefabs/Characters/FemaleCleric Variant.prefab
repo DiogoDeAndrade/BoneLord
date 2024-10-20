@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6173783224894425366
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4327369604647002785, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -9113063324565185054, guid: 4862faa792d49d84496e5564d54a145d, type: 3}
+    - target: {fileID: 4843041512738309993, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843041512738309993, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041799158949163190, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 8250ddce4bbae0c48906ed7b8b40d734, type: 2}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -116.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -69.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179951935270044628, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: dropCount.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: dropCount.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: _displayName
+      value: Cleric
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: _enemyDetectionRadius
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: m_Name
+      value: FemaleCleric Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
