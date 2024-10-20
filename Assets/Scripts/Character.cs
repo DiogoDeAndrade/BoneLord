@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
     private float   enemyDetectionRadius = 0.0f;
     [SerializeField]
     private Transform _toolPivot;
+    [SerializeField, MinMaxSlider(0, 4)]
+    private Vector2Int dropCount;
 
     public float        moveSpeed => _moveSpeed;
     public bool         isPlayer => _faction == Faction.Player;
@@ -46,8 +48,9 @@ public class Character : MonoBehaviour
     bool        alert = false;
     Vector2     ctOffset;
     Buffs       _buffs;
-    Item        _currentTool;
-    GameObject  _toolObj;
+    Item        currentTool;
+    GameObject  toolObj;
+    DropSystem  dropSystem;
 
     public delegate void OnAlert(bool alertEnable);
     public event OnAlert onAlert;
@@ -57,6 +60,7 @@ public class Character : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         flash = GetComponent<Flash>();
+        dropSystem = GetComponent<DropSystem>();
         emoteTimer = _emoteCooldown.Random();
         hp = _maxHP;
         _buffs = new(this);
@@ -215,6 +219,13 @@ public class Character : MonoBehaviour
             {
                 // Die
                 animator?.SetTrigger("Die");
+
+                // Drops
+                int r = dropCount.Random();
+                for (int i = 0; i < r; i++)
+                {
+                    dropSystem?.Drop();
+                }
             }
 
             return true;
@@ -244,8 +255,8 @@ public class Character : MonoBehaviour
         GameObject toolPrefab = Globals.GetPrefab(tool);
         if (toolPrefab)
         {
-            _toolObj = Instantiate(toolPrefab, _toolPivot);
-            _currentTool = tool;
+            toolObj = Instantiate(toolPrefab, _toolPivot);
+            currentTool = tool;
         }
     }
 

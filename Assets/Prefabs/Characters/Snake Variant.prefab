@@ -73,6 +73,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: dropCount.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      propertyPath: dropCount.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869484829898934478, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
       propertyPath: _displayName
       value: Snake
       objectReference: {fileID: 0}
@@ -95,6 +103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7477632161370246984}
+    - targetCorrespondingSourceObject: {fileID: 8027990544682162124, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7273256188990394961}
   m_SourcePrefab: {fileID: 100100000, guid: 7a59bc7c01d6cdf4696039b61d7edc8e, type: 3}
 --- !u!1 &2615082454694354338 stripped
 GameObject:
@@ -120,3 +131,22 @@ MonoBehaviour:
   damageType: 4
   buffsToApply:
   - {fileID: 11400000, guid: effadff8e55022f48a019d540a7dcb1d, type: 2}
+--- !u!114 &7273256188990394961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2615082454694354338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7fbbf2320429a940bb06bafeb4cfbdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noneProbability: 50
+  dropList:
+  - item: {fileID: 11400000, guid: de1b6079c66bae741baddca89997b3e1, type: 2}
+    prob: 20
+  - item: {fileID: 11400000, guid: 8809464851754dc46b915687a3aac40d, type: 2}
+    prob: 20
+  itemPrefab: {fileID: 5872022562244922992, guid: 0c5b35e24c799394fb3ad362726de372, type: 3}
