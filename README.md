@@ -36,6 +36,40 @@ I was having a lot of fun with this one, and I believe it can actually be fun, s
 
 ![image](screenshots/screen02.png)
 
+## Future
+
+There are a lot of ideas for future here, just keeping them here as a kind of to do list:
+
+* Impact effects
+* Sounds
+* Ranged attacks
+* Melee AOE attack (single, ranged and targetted)
+* Melee and ranged attack defs
+  * So we can customize the properties without using hardcoded values
+* Add "coward" as an effect for some items
+* Item combinations to change name/color/properties
+* Shop
+  * Buy items
+  * Hire units
+    * Units like goblins and mercenary units have an upkeep
+  * Sell items
+* Gold system
+* Treasure chests and containers in the environment
+* Better environment
+  * Fog of war
+  * Pathfinding
+* Summon sickness
+  * Summoned units take a bit to be at full power
+* Spellbook
+  * Items can only be used after being researched (with a cost in souls)
+* Other tools
+  * Axe to cut trees
+  * Lockpicks to open closed doors
+  * Sword to improve attack
+  * Shield is an idea to improve defense (not implemented yet), but it clashes with the idea of only one tool
+* Cauldron
+  * Enables creating better items to improve summoning
+
 ## Credits
 
 * [Animated Wizard sprites](https://opengameart.org/content/animated-wizard) by [Calciumtrice](https://opengameart.org/users/calciumtrice), licensed through [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)
