@@ -47,12 +47,7 @@ public class UISummoningCircle : UIPanel
         Canvas canvas = GetComponentInParent<Canvas>();
         mainCamera = canvas.worldCamera;
 
-#if UNITY_EDITOR
-        if (debugStartItems != null)
-        {
-            RefreshSlots();
-        }
-#endif
+        RefreshSlots();
     }
 
     protected override void Start()

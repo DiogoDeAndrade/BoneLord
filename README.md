@@ -1,8 +1,40 @@
 # BONELORD
 
-![image](screenshots/title01.png)
+![image](Assets\Sprites\UI\title_image.png)
 
 A game for the Zer0 Game Jam at Universidade Lusófona. The theme was "Bones".
+
+In Bonelord, you control a necromancer that can summon skeletons to fight waves of self-righteous clerics.
+
+Gather resources and build custom skeletons from scratch!
+
+This was my entry for the "Zero Game Jam" at Lusófona University, and is very incomplete. Basically I built the whole game in 20 hours or so.
+
+Full source code can be found at https://github.com/DiogoDeAndrade/BoneLord
+
+I was having a lot of fun with this one, and I believe it can actually be fun, so I may develop this further in the future.
+
+![image](screenshots/screen01.png)
+
+* Left-Click on the necromancer to see your inventory.
+* Left-Click on the goblin or any player controlled character to select it
+* Right-Click with a selected unit to make it walk there
+* Some units are cowards, i.e., they will actively run away from enemies
+* Goblins can pickup items from the playfield
+* Items can be used to create skeletons
+* Click the summoning circle to summon a skeleton
+* You need to select the ingredients for the summon
+* Different ingredients do different things
+* Rules:
+* At least one bone must be used in the skeleton
+* Only one tool can be used (only one tool in the game at the moment, the pickaxe)
+* The rest find out what they do...
+* Skeletons with a mining pick can mine ore nodes and get more (and rarer) items
+* From time to time, some cleric will appear and walk towards the necromancer
+* When they get there, they will attack him and if they kill him it's game over
+* The game doesn't have an end, it's just going forever until you inevitably lose
+
+![image](screenshots/screen02.png)
 
 ## Credits
 
