@@ -3272,6 +3272,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   cursor: {fileID: 739337557}
+  gameOverScene: GameOver
 --- !u!4 &1420933481
 Transform:
   m_ObjectHideFlags: 0

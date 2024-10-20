@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using NaughtyAttributes;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerControl : MonoBehaviour
     private LayerMask           characterLayer;
     [SerializeField]
     private GameCursor          cursor;
+    [SerializeField, Scene]
+    private string              gameOverScene;
 
     static PlayerControl Instance;
 
@@ -151,7 +154,7 @@ public class PlayerControl : MonoBehaviour
         if ((playerCharacter) && (playerCharacter.isDead))
         {
             // Player died, show game over
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene(gameOverScene);
         }
     }
 
