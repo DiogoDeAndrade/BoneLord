@@ -16,6 +16,8 @@ I was having a lot of fun with this one, and I believe it can actually be fun, s
 
 ![image](screenshots/screen01.png)
 
+## Instructions
+
 * Left-Click on the necromancer to see your inventory.
 * Left-Click on the goblin or any player controlled character to select it
 * Right-Click with a selected unit to make it walk there
