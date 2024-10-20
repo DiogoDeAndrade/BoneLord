@@ -22,7 +22,7 @@ public class Buff : ScriptableObject
         public float elapsedTimePercentage => (tickDuration == 0) ? (0.0f) : ((Time.time - startTime) / (type.tickDuration * Globals.tickFrequency));
     }
 
-    public enum Type { DOT, ModifyHPChange };
+    public enum Type { DOT, ModifyHPChange, Aura };
     public enum FilterChange { Negative, Any, Positive };
 
     [ResizableTextArea]
@@ -33,7 +33,6 @@ public class Buff : ScriptableObject
 
     [ShowIf("needDamageType")]
     public DamageType   damageType;
-    [ShowIf("needDuration")]
     public int          tickDuration;
     [ShowIf("isDamage")]
     public int          damagePerTick;
@@ -45,12 +44,20 @@ public class Buff : ScriptableObject
     public float        constant = 0;
     [ShowIf("isModify")]
     public bool         anyDamageType = true;
+    [ShowIf("needFaction")]
+    public Faction      faction = Faction.Enemy;
+    [ShowIf("needMaxAffect")]
+    public int          maxAffect = 3;
+    [ShowIf("needRadius")]
+    public float        radius = 80.0f;
 
-    public bool isDamage => (type == Type.DOT);
+    public bool isDamage => (type == Type.DOT) || (type == Type.Aura);
     public bool isModify => (type == Type.ModifyHPChange);
-    public bool needDuration => (type == Type.DOT) || (type == Type.ModifyHPChange);
-    public bool needDamageType => (type == Type.DOT) || ((type == Type.ModifyHPChange) && (!anyDamageType));
+    public bool needDamageType => (type == Type.DOT) || ((type == Type.ModifyHPChange) && (!anyDamageType)) || (type == Type.Aura);
     public bool needFilter => (type == Type.ModifyHPChange);
+    public bool needFaction => (type == Type.Aura);
+    public bool needRadius => (type == Type.Aura);
+    public bool needMaxAffect => (type == Type.Aura);
 
     public Instance Start()
     {
@@ -71,6 +78,8 @@ public class Buff : ScriptableObject
         {
             case Type.DOT:
                 return RunDOT(instance, character);
+            case Type.Aura:
+                return RunAura(instance, character);
             case Type.ModifyHPChange:
                 // Nothing to do on a tick, it just affects damage that goes in the system
                 break;
@@ -84,6 +93,16 @@ public class Buff : ScriptableObject
     private bool RunDOT(Instance instance, Character character)
     {
         character.DealDamage(damagePerTick, damageType);
+
+        return true;
+    }
+    private bool RunAura(Instance instance, Character character)
+    {
+        var characters = character.GetCharactersInRange(radius, faction);
+        for (int i = 0; i < Mathf.Min(characters.Count, maxAffect); i++)
+        {
+            characters[i].DealDamage(damagePerTick, damageType);
+        }
 
         return true;
     }

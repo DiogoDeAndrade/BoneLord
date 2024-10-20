@@ -17,7 +17,7 @@ MonoBehaviour:
   hp: 20
   title: 
   hasColor: 1
-  color: {r: 0.4515397, g: 0.67645043, b: 0.6886792, a: 1}
+  color: {r: 0.48949805, g: 0.80784833, b: 0.8301887, a: 1}
   colorPriority: 0
   buffsToApply: []
   categories:

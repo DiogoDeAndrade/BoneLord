@@ -15,6 +15,8 @@ public class UIPanel : MonoBehaviour
         canvasGroup= GetComponent<CanvasGroup>();
 
         canvasGroup.alpha = 0.0f;
+        canvasGroup.interactable = (canvasGroup.alpha > 0.0f);
+        canvasGroup.blocksRaycasts = (canvasGroup.alpha > 0.0f);
     }
 
     protected virtual void Update()
@@ -27,6 +29,7 @@ public class UIPanel : MonoBehaviour
             {
                 canvasInc = 0.0f;
 
+                canvasGroup.interactable = (canvasGroup.alpha > 0.0f);
                 canvasGroup.blocksRaycasts = (canvasGroup.alpha > 0.0f);
             }
         }

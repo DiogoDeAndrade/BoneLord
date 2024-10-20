@@ -17,7 +17,7 @@ MonoBehaviour:
   hp: 1
   title: 
   hasColor: 1
-  color: {r: 0.18672843, g: 0.8018868, b: 0.13995194, a: 1}
+  color: {r: 0.47019783, g: 0.8301887, b: 0.44250622, a: 1}
   colorPriority: 5
   buffsToApply:
   - {fileID: 11400000, guid: 9bf7336d61857d84e8cf8edee4487ede, type: 2}

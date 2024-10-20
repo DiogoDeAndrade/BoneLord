@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -271,6 +272,27 @@ public class Character : MonoBehaviour
         animTool?.SetBool("Work", v);
     }
 
+    public List<Character> GetCharactersInRange(float radius, Faction faction)
+    {
+        List<Character> ret = new();
+
+        var colliders = Physics2D.OverlapCircleAll(transform.position, radius, 1 << gameObject.layer);
+        foreach (var collider in colliders)
+        {
+            // Check if it is an item
+            var character = collider.GetComponent<Character>();
+            if (character != null)
+            {
+                if ((!character.isDead) && (character.faction == faction))
+                {
+                    ret.Add(character);
+                }
+            }
+        }
+
+        return ret;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (_enemyDetectionRadius > 0)
@@ -279,5 +301,4 @@ public class Character : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, _enemyDetectionRadius);
         }
     }
-
 }
