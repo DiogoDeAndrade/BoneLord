@@ -1,5 +1,3 @@
-using System;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class Pickable : MonoBehaviour
